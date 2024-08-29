@@ -1,1 +1,1 @@
-wawa
+import * as THREE from 'three';
