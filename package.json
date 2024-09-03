@@ -1,6 +1,20 @@
 {
+  "name": "threejs-journey-exercise",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "deploy": "gh-pages -d dist"
+  },
+  "devDependencies": {
+    "vite": "^4.0.4"
+  },
   "dependencies": {
-    "gh-pages": "^6.1.1"
-	"deploy": gh-pages -d dist
+    "gh-pages": "^5.0.0",
+    "gsap": "^3.5.1",
+    "lil-gui": "^0.17.0",
+    "three": "^0.148.0"
   }
 }
