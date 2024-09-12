@@ -11,9 +11,11 @@
 </head>
 <body>
   <script type="module">
-    import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.155.0/build/three.module.js';
-    import { OrbitControls } from 'https://cdn.jsdelivr.net/npm/three@0.155.0/examples/jsm/controls/OrbitControls.js';
-    import { GLTFLoader } from 'https://cdn.jsdelivr.net/npm/three@0.155.0/examples/jsm/loaders/GLTFLoader.js';
+  
+			import * as THREE from 'three';
+
+			import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+			import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 
     // Scene
     const scene = new THREE.Scene();
@@ -34,7 +36,7 @@
 
     // Load the GLTF model
     const loader = new GLTFLoader();
-    loader.load('model.glb', function (gltf) {
+    loader.load('Axford_Heavy_Cruiser.glb', function (gltf) {
       const model = gltf.scene;
 
       // Set transparency
