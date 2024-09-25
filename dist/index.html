@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>3D Model Viewer</title>
+  
+  <script type="module" crossorigin src="./assets/index-5afe3bfd.js"></script>
+  <link rel="stylesheet" href="./assets/index-11c123c5.css">
+</head>
+<body>
+  <div class="crosshair"></div>
+
+  <div class="container">
+    <div class="sidebar left-sidebar">
+      <h3>Compartment</h3>
+      <h3>Components</h3>
+      <h3>Modules</h3>
+      <div class="section-content" id="compartmentDropdowns"></div>
+    </div>
+  </div>
+
+  <div class="sidebar right-sidebar">
+    <h3>Hull</h3>
+    <select id="hullDropdown"></select>
+    <h3>Shell</h3> 
+    <select id="shellDropdown"></select>
+    <div class="section">
+      <div class="section-content"></div>
+    </div>
+  </div>
+  
+  <div id="tooltip" class="tooltip"></div>
+  
+</body>
+</html>
