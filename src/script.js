@@ -27,7 +27,7 @@ let model;
 
 function loadModel(glbFile) {
   if (model) scene.remove(model);  // Remove previous model
-  loader.load(`hulls/${glbFile}`, function (gltf) {
+  loader.load(`hulls\${glbFile}`, function (gltf) {
     model = gltf.scene;
     model.rotation.y = Math.PI; // Flip model 180 degrees
     scene.add(model);
@@ -43,7 +43,7 @@ function loadModel(glbFile) {
 }
 
 // Load hulls and CSV on startup
-fetch('src/hulls.txt').then(response => response.text()).then(data => {
+fetch('src\hulls.txt').then(response => response.text()).then(data => {
   const hulls = data.split('\n').filter(Boolean);
   const hullDropdown = document.getElementById('hullDropdown');
 
@@ -60,7 +60,7 @@ fetch('src/hulls.txt').then(response => response.text()).then(data => {
 
 function loadCSV() {
   const hull = document.getElementById('hullDropdown').value;
-  fetch(`src/hulls/${hull}.csv`).then(response => response.text()).then(data => {
+  fetch(`src\hulls\${hull}.csv`).then(response => response.text()).then(data => {
     const lines = data.split('\n').filter(Boolean);
     const [glbFile] = lines[0].split(',');
 
@@ -69,7 +69,7 @@ function loadCSV() {
   });
 }
 
-fetch('src/shells.csv')
+fetch('src\shells.csv')
   .then(response => response.text())
   .then(data => {
     const lines = data.split('\n').filter(Boolean);
