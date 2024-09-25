@@ -43,7 +43,7 @@ function loadModel(glbFile) {
 }
 
 // Load hulls and CSV on startup
-fetch('hulls.txt').then(response => response.text()).then(data => {
+fetch('src/hulls.txt').then(response => response.text()).then(data => {
   const hulls = data.split('\n').filter(Boolean);
   const hullDropdown = document.getElementById('hullDropdown');
 
@@ -60,7 +60,7 @@ fetch('hulls.txt').then(response => response.text()).then(data => {
 
 function loadCSV() {
   const hull = document.getElementById('hullDropdown').value;
-  fetch(`hulls/${hull}.csv`).then(response => response.text()).then(data => {
+  fetch(`src/hulls/${hull}.csv`).then(response => response.text()).then(data => {
     const lines = data.split('\n').filter(Boolean);
     const [glbFile] = lines[0].split(',');
 
@@ -69,7 +69,7 @@ function loadCSV() {
   });
 }
 
-fetch('shells.csv')
+fetch('src/shells.csv')
   .then(response => response.text())
   .then(data => {
     const lines = data.split('\n').filter(Boolean);
