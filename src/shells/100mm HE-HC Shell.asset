@@ -1,0 +1,121 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -682611449, guid: 1e464caa2faff31494aed425945ecaa2, type: 3}
+  m_Name: 100mm HE-HC Shell
+  m_EditorClassIdentifier:
+  _pointCost: 1
+  _pointDivision: 250
+  _storageVolume: 0.05
+  _factionKey: Stock/Protectorate
+  _flavorText: A variant of the 100mm HE shell with a greater length and more explosive capacity at the expense of armor penetration.  Most useful against targets which have had the armor stripped off by plasma barrage.
+  _screenshot: {fileID: 0}
+  _tags:
+    Class: Ballistic/Chemical
+    Subclass: 100mm
+  _role: 1
+  _weightClassDiscrepancy: 2
+  _maxFlightTime: 8
+  _flightSpeed: 90
+  _repoolDelay: 5
+  _armorPenetration: 8
+  _armorDamageRadius: 0.4
+  _heatPower: 200
+  _componentDamage: 70
+  _randomEffectMultiplier: 0.25
+  _neverCrit: 0
+  _crewVulnerabilityMultiplier: 1
+  _maxPenetrationDistance: 3
+  _neverOverpen: 0
+  _overrideComponentSearchDistance: -1
+  _overpenDamageMultiplier: 0.2
+  _overpenDamageSpreadMethod: 0
+  _ignoreDamageReduction: 0
+  _alwaysSpreadDamage: 0
+  _forceBodyWakeup: 0
+  _applyImpulseOnImpact: 0
+  _impulseMagnitude: 0
+  _effectsGroups:
+    _surfaceGroups:
+    - _surfaceType:
+      _ricochetEffects:
+      - {fileID: 1005441417936131, guid: 1faf85bf834404f4fa4fee9f8c9d2706, type: 2}
+      _impactEffects:
+      - {fileID: 1512240642401790, guid: c95d0e130954c5845aa098ded504b74a, type: 2}
+      _penetratingEffects:
+      - {fileID: 1837076908522350, guid: 540c5d2e7ebeab44b89e39a2c45b7820, type: 2}
+      _penetrationExitEffects:
+      - {fileID: 1591888990183910, guid: 9d55624cb4fb7794baf77e071c2c4a68, type: 2}
+      _destructionEffects: []
+    - _surfaceType: Surface-Rock
+      _ricochetEffects:
+      - {fileID: 1828565425596537, guid: 3c7a5468b03e19546b929b6e8bc15370, type: 2}
+      _impactEffects:
+      - {fileID: 1828565425596537, guid: 3c7a5468b03e19546b929b6e8bc15370, type: 2}
+      _penetratingEffects:
+      - {fileID: 1828565425596537, guid: 3c7a5468b03e19546b929b6e8bc15370, type: 2}
+      _penetrationExitEffects:
+      - {fileID: 1828565425596537, guid: 3c7a5468b03e19546b929b6e8bc15370, type: 2}
+      _destructionEffects: []
+  _modId: 0
+  _munitionName:
+  _munitionKey: c0c913cb-c125-4d4e-afcf-768b0f681f43
+  _tracerEffect:
+    _effectAsset: {fileID: 2058629509, guid: f4ca554c2a8daae448f09f015844f157, type: 2}
+    _colors: []
+    _gradients:
+    - Name: Color
+      Value:
+        serializedVersion: 2
+        key0: {r: 1.419759, g: 67.793495, b: 0, a: 1}
+        key1: {r: 1.419759, g: 67.793495, b: 0, a: 0.9577465}
+        key2: {r: 1, g: 1, b: 1, a: 0.25882354}
+        key3: {r: 0, g: 0, b: 0, a: 0}
+        key4: {r: 0, g: 0, b: 0, a: 0}
+        key5: {r: 0, g: 0, b: 0, a: 0}
+        key6: {r: 0, g: 0, b: 0, a: 0}
+        key7: {r: 0, g: 0, b: 0, a: 0}
+        ctime0: 0
+        ctime1: 870
+        ctime2: 1214
+        ctime3: 0
+        ctime4: 0
+        ctime5: 0
+        ctime6: 0
+        ctime7: 0
+        atime0: 0
+        atime1: 1300
+        atime2: 2341
+        atime3: 65535
+        atime4: 0
+        atime5: 0
+        atime6: 0
+        atime7: 0
+        m_Mode: 0
+        m_NumColorKeys: 3
+        m_NumAlphaKeys: 4
+    _floats:
+    - Name: Width
+      Value: 0.1
+    - Name: Lifetime
+      Value: 2.5
+  _whine: {fileID: 8300000, guid: b4983c8f4dddb5244a1ee68dd56ae08d, type: 3}
+  _castType: 0
+  _spherecastRadius: 1
+  _rayAngle: 15
+  _rayCount: 5
+  _alwaysDoStructureDamage: 0
+  _dedicatedStructureDamage: 0
+  _alwaysSpreadThroughStructure: 0
+  _playDestructionEffectOnTimeout: 0
+  _penetrationEnvelope: 0.8
+  _explosionRadius: 1
+  _explodeOnFirstUnDestroyed: 0

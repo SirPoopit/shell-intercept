@@ -1,0 +1,61 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -2058970743, guid: 1e464caa2faff31494aed425945ecaa2, type: 3}
+  m_Name: 20mm Slug
+  m_EditorClassIdentifier:
+  _pointCost: 1
+  _pointDivision: 2000
+  _storageVolume: 0.0025
+  _factionKey:
+  _flavorText: 20mm high-velocity metal slug utilized in rapid-fire weapons, such as the Defender PDT. Ineffective against anything with warship-grade hull armoring, but deadly against light targets such as missiles or personal craft.
+  _screenshot: {fileID: 0}
+  _tags:
+    Class: Ballistic/Chemical
+    Subclass: 20mm
+  _role: 2
+  _weightClassDiscrepancy: 0
+  _maxFlightTime: 2.5
+  _flightSpeed: 70
+  _repoolDelay: 1
+  _armorPenetration: 3
+  _armorDamageRadius: 0.1
+  _heatPower: 0
+  _componentDamage: 15
+  _randomEffectMultiplier: 0.01
+  _neverCrit: 0
+  _crewVulnerabilityMultiplier: 0.01
+  _maxPenetrationDistance: 0.5
+  _neverOverpen: 0
+  _overrideComponentSearchDistance: -1
+  _overpenDamageMultiplier: 0.2
+  _overpenDamageSpreadMethod: 0
+  _ignoreDamageReduction: 0
+  _alwaysSpreadDamage: 0
+  _forceBodyWakeup: 0
+  _applyImpulseOnImpact: 0
+  _impulseMagnitude: 0
+  _effectsGroups:
+    _surfaceGroups:
+    - _surfaceType:
+      _ricochetEffects:
+      - {fileID: 1011306353411050, guid: ddac0ec1ac8849942bdb161e2fd29466, type: 2}
+      _impactEffects:
+      - {fileID: 1022588935534865, guid: 965f65f8e70911e439f74c7412b29ce4, type: 2}
+      - {fileID: 1428352986401784, guid: 714672b87f8f8a14aaf3e33928456558, type: 2}
+      _penetratingEffects:
+      - {fileID: 1941053805311407, guid: 81410e16a36121a41ab894baaee87886, type: 2}
+      _penetrationExitEffects: []
+      _destructionEffects: []
+  _modId: 0
+  _munitionName:
+  _munitionKey: 0a57bc1f-802c-46d5-8f6c-e1fc21a399c5
+  _tracerColor: {r: 16.94838, g: 0.17746994, b: 0.17746994, a: 1}

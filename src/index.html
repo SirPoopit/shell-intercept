@@ -4,220 +4,31 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>3D Model Viewer</title>
-  <style>
-    body { margin: 0; overflow: hidden; }
-    canvas { display: block; }
-
-    /* Crosshair styles */
-    .crosshair {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 20px;
-      height: 20px;
-      margin-left: -10px; /* Center horizontally */
-      margin-top: -10px;  /* Center vertically */
-      pointer-events: none;
-    }
-
-    .crosshair::before, .crosshair::after {
-      content: '';
-      position: absolute;
-      background: black; /* Crosshair color */
-    }
-
-    /* Vertical line of the crosshair */
-    .crosshair::before {
-      left: 50%;
-      top: 0;
-      width: 2px;
-      height: 100%;
-      transform: translateX(-50%);
-    }
-
-    /* Horizontal line of the crosshair */
-    .crosshair::after {
-      top: 50%;
-      left: 0;
-      width: 100%;
-      height: 2px;
-      transform: translateY(-50%);
-    }
-  </style>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <div class="crosshair"></div>
-  <script type="module">
+
+  <div class="container">
+    <div class="sidebar left-sidebar">
+      <h3>Compartment</h3>
+      <h3>Components</h3>
+      <h3>Modules</h3>
+      <div class="section-content" id="compartmentDropdowns"></div>
+    </div>
+  </div>
+
+  <div class="sidebar right-sidebar">
+    <h3>Hull</h3>
+    <select id="hullDropdown"></select>
+    <h3>Shell</h3> 
+    <select id="shellDropdown"></select>
+    <div class="section">
+      <div class="section-content"></div>
+    </div>
+  </div>
   
-			import * as THREE from 'three';
-
-			import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
-			import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
-
-    // Scene
-    const scene = new THREE.Scene();
-
-    // Camera
-    const camera = new THREE.PerspectiveCamera(90, window.innerWidth / window.innerHeight, 0.1, 100);
-    camera.position.set(-15, 0, 0);
-
-    // Renderer
-    const renderer = new THREE.WebGLRenderer({ antialias: true });
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    renderer.setClearColor(0x000000);
-    document.body.appendChild(renderer.domElement);
-
-    // Orbit Controls
-    const controls = new OrbitControls(camera, renderer.domElement);
-    controls.enableDamping = true;
-
-    // Load the GLTF model
-    let model = null; // Initialize model as null
-    const loader = new GLTFLoader();
-    loader.load('Axford_Heavy_Cruiser.glb', function (gltf) {
-      model = gltf.scene;
-
-      // Set transparency
-      model.traverse((child) => {
-        if (child.isMesh) {
-          child.material.transparent = true;
-          child.material.opacity = 0.75;
-        }
-      });
-
-      scene.add(model);
-    }, undefined, function (error) {
-      console.error('An error happened', error);
-    });
-
-// Lighting
-    const ambientLight = new THREE.AmbientLight(0xffffff, 1);
-    scene.add(ambientLight);
-
-    const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
-    directionalLight.position.set(5, 5, 5);
-    scene.add(directionalLight);
-
-    
-
-    // Raycaster
-    const raycaster = new THREE.Raycaster();
-
-    // Function to create a transparent purple circle perpendicular to the surface
-    function createPurpleCircle(position, normal) {
-      const circleGeometry = new THREE.CircleGeometry(0.1, 32);
-      const circleMaterial = new THREE.MeshBasicMaterial({ color: 0x800080, transparent: true, opacity: 0.5 });
-      const circle = new THREE.Mesh(circleGeometry, circleMaterial);
-      circle.position.copy(position);
-
-      // Rotate the circle to be perpendicular to the surface normal
-      circle.lookAt(position.clone().add(normal));
-      circle.rotation.x = Math.PI / 2; // Align with the surface normal
-      scene.add(circle);
-    }
-
-    // Function to draw a transparent yellow cone pointing in the direction of the ray
-    function drawCone(position, direction) {
-      const coneGeometry = new THREE.ConeGeometry(0.2, 0.4, 16);
-      const coneMaterial = new THREE.MeshBasicMaterial({ color: 0xffff00, transparent: true, opacity: 0.5 });
-      const cone = new THREE.Mesh(coneGeometry, coneMaterial);
-      cone.position.copy(position);
-
-      // Align the cone to point in the direction of the ray
-      cone.rotation.x = Math.PI / 2; // Point upwards initially
-      const lookAt = new THREE.Vector3().copy(direction).add(position);
-      cone.lookAt(lookAt);
-
-      scene.add(cone);
-    }
-
-    // Function to draw a ray from start to end with the given material
-    function drawRay(start, end, material) {
-      const points = [start.clone(), end.clone()];
-      const lineGeometry = new THREE.BufferGeometry().setFromPoints(points);
-      const line = new THREE.Line(lineGeometry, material);
-      scene.add(line);
-    }
-
-    // Handle spacebar press
-    window.addEventListener('keydown', (event) => {
-      if (event.code === 'Space') {
-        if (model) {
-          let rayOrigin = camera.position.clone();
-          let rayDirection = new THREE.Vector3(0, 0, -1).applyQuaternion(camera.quaternion).normalize();
-          let rayLength = 5;
-
-          raycaster.set(rayOrigin, rayDirection);
-          let intersects = raycaster.intersectObject(model, true);
-
-          if (intersects.length > 0) {
-            let firstIntersection = intersects[0].point;
-            let firstNormal = intersects[0].face.normal;
-
-            createPurpleCircle(firstIntersection, firstNormal);
-
-            // Draw initial ray in red
-            drawRay(rayOrigin, firstIntersection, new THREE.LineBasicMaterial({ color: 0xff0000 }));
-
-            // Extend the ray and handle subsequent intersections
-            extendRay(firstIntersection, rayDirection, rayLength);
-          }
-        }
-      }
-    });
-
-    // Function to extend the ray after the first intersection
-    function extendRay(startPoint, direction, remainingDistance) {
-      let rayOrigin = startPoint.clone();
-      let rayDirection = direction.clone().normalize();
-
-      // Perform the next raycast starting from the last intersection point
-      raycaster.set(rayOrigin, rayDirection);
-      let intersects = raycaster.intersectObject(model, true);
-
-      if (intersects.length > 0) {
-        let lastIntersection = intersects[0].point;
-        let lastNormal = intersects[0].face.normal;
-        let distanceToIntersection = startPoint.distanceTo(lastIntersection);
-
-        if (distanceToIntersection > 5) {
-          // If the distance is greater than 5, draw a green line and a cone
-          let greenLineEnd = startPoint.clone().add(rayDirection.multiplyScalar(5));
-          drawRay(startPoint, greenLineEnd, new THREE.LineBasicMaterial({ color: 0x00ff00 }));
-          drawCone(greenLineEnd, rayDirection);
-
-          // Continue with the remaining part of the ray
-          let remainingLength = distanceToIntersection - 5;
-          extendRay(greenLineEnd, rayDirection, remainingLength);
-        } else {
-          // If the distance is less than or equal to 5, draw a red line all the way through
-          drawRay(startPoint, lastIntersection, new THREE.LineBasicMaterial({ color: 0xff0000 }));
-        }
-        createPurpleCircle(lastIntersection, lastNormal);
-      } else {
-        // No further intersection, draw the remaining length of the ray
-        let endPoint = startPoint.clone().add(rayDirection.multiplyScalar(remainingDistance));
-        drawRay(startPoint, endPoint, new THREE.LineBasicMaterial({ color: 0x00ff00 }));
-      }
-    }
-
-    // Handle window resize
-    window.addEventListener('resize', () => {
-      const width = window.innerWidth;
-      const height = window.innerHeight;
-      camera.aspect = width / height;
-      camera.updateProjectionMatrix();
-      renderer.setSize(width, height);
-    });
-
-    // Animation loop
-    function animate() {
-      requestAnimationFrame(animate);
-      controls.update();
-      renderer.render(scene, camera);
-    }
-
-    animate();
-  </script>
+  <div id="tooltip" class="tooltip"></div>
+  <script type="module" src="script.js"></script>
 </body>
 </html>

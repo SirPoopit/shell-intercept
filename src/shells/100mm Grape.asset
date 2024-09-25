@@ -1,0 +1,92 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 548285470, guid: 1e464caa2faff31494aed425945ecaa2, type: 3}
+  m_Name: 100mm Grape
+  m_EditorClassIdentifier:
+  _pointCost: 1
+  _pointDivision: 250
+  _storageVolume: 0.05
+  _factionKey: Stock/Protectorate
+  _flavorText: A canister of small, hardened metal beads.  Their low mass allows for higher velocity compared to standard shells.  Can be used against lightly armored targets to directly attack crew and damage delicate systems, or against missiles in flight.
+  _screenshot: {fileID: 0}
+  _tags:
+    Class: Ballistic/Chemical
+    Subclass: 100mm
+  _role: 3
+  _weightClassDiscrepancy: 2
+  _maxFlightTime: 7.27
+  _flightSpeed: 110
+  _repoolDelay: 0
+  _armorPenetration: 16
+  _armorDamageRadius: 0.4
+  _heatPower: 0
+  _componentDamage: 25
+  _randomEffectMultiplier: 5
+  _neverCrit: 1
+  _crewVulnerabilityMultiplier: 5
+  _maxPenetrationDistance: -1
+  _neverOverpen: 0
+  _overrideComponentSearchDistance: 5
+  _overpenDamageMultiplier: 0.2
+  _overpenDamageSpreadMethod: 0
+  _ignoreDamageReduction: 0
+  _alwaysSpreadDamage: 0
+  _forceBodyWakeup: 0
+  _applyImpulseOnImpact: 0
+  _impulseMagnitude: 0
+  _effectsGroups:
+    _surfaceGroups:
+    - _surfaceType:
+      _ricochetEffects:
+      - {fileID: 1005441417936131, guid: 1faf85bf834404f4fa4fee9f8c9d2706, type: 2}
+      _impactEffects:
+      - {fileID: 1512240642401790, guid: c95d0e130954c5845aa098ded504b74a, type: 2}
+      _penetratingEffects:
+      - {fileID: 1464597243343211, guid: 0879cac65c37de64c8531df039248f89, type: 2}
+      _penetrationExitEffects:
+      - {fileID: 1591888990183910, guid: 9d55624cb4fb7794baf77e071c2c4a68, type: 2}
+      _destructionEffects: []
+    - _surfaceType: Surface-Rock
+      _ricochetEffects:
+      - {fileID: 1828565425596537, guid: 3c7a5468b03e19546b929b6e8bc15370, type: 2}
+      _impactEffects:
+      - {fileID: 1828565425596537, guid: 3c7a5468b03e19546b929b6e8bc15370, type: 2}
+      _penetratingEffects:
+      - {fileID: 1828565425596537, guid: 3c7a5468b03e19546b929b6e8bc15370, type: 2}
+      _penetrationExitEffects:
+      - {fileID: 1828565425596537, guid: 3c7a5468b03e19546b929b6e8bc15370, type: 2}
+      _destructionEffects: []
+  _modId: 0
+  _munitionName:
+  _munitionKey: 0355110d-f9f0-4d8a-8213-2a3016baa282
+  _tracerEffect:
+    _effectAsset: {fileID: 2058629509, guid: 72e589c8b6e2f4f4d87da5d649bba856, type: 2}
+    _colors:
+    - Name: Color
+      Value: {r: 18.097403, g: 0.1753886, b: 0, a: 1}
+    _gradients: []
+    _floats:
+    - Name: Group Stretching
+      Value: 0.45
+    - Name: Lifetime
+      Value: 6
+  _whine: {fileID: 8300000, guid: b4983c8f4dddb5244a1ee68dd56ae08d, type: 3}
+  _castType: 2
+  _spherecastRadius: 1
+  _rayAngle: 30
+  _rayCount: 8
+  _alwaysDoStructureDamage: 0
+  _dedicatedStructureDamage: 0
+  _alwaysSpreadThroughStructure: 0
+  _playDestructionEffectOnTimeout: 0
+  _lookaheadSphereRadius: 0.75
+  _includeMunitions: 1

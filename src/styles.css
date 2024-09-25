@@ -1,0 +1,107 @@
+@font-face {
+  font-family: 'bombardier';
+  src: url('fonts\bombardier.otf') format('opentype');
+}
+
+/* General body styling */
+body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: black;
+    font-family: Arial, sans-serif;
+    color: white;
+	font-family: 'bombardier', sans-serif;
+}
+
+/* Top Bar */
+.top-bar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 50px;
+    background-color: #1a1a1a;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 50px;
+    z-index: 10;
+}
+
+/* Sidebars */
+.sidebar {
+    position: absolute;
+    top: 100px;  /* Adjusted to fit below the top bar */
+    bottom: 0;
+    width: 300px;
+    background-color: #202020;
+    padding: 10px;
+    overflow-y: auto;
+}
+
+.left-sidebar {
+    left: 0;
+}
+
+.right-sidebar {
+    right: 0;
+}
+
+
+/* Dropdown styling */
+select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    font-size: 14px;
+    background-color: #2a2a2a;
+    color: #fff;
+    border: 1px solid #555;
+}
+
+
+    .crosshair {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 20px;
+      height: 20px;
+      margin-left: -10px; /* Center horizontally */
+      margin-top: -10px;  /* Center vertically */
+      pointer-events: none;
+    }
+
+    .crosshair::before, .crosshair::after {
+      content: '';
+      position: absolute;
+      background: black; /* Crosshair color */
+    }
+
+    /* Vertical line of the crosshair */
+    .crosshair::before {
+      left: 50%;
+      top: 0;
+      width: 2px;
+      height: 100%;
+      transform: translateX(-50%);
+    }
+
+    /* Horizontal line of the crosshair */
+    .crosshair::after {
+      top: 50%;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      transform: translateY(-50%);
+    }
+	
+	
+	select {
+  background-position: left center;
+  background-repeat: no-repeat;
+  background-size: 144px;
+  padding-left: 25px;
+  font-family: 'bombardier', sans-serif;
+}
