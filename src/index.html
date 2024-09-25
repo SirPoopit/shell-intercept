@@ -1,24 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>20 - Scroll base animation</title>
-    <link rel="stylesheet" href="./style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>3D Model Viewer</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <canvas class="webgl"></canvas>
+  <div class="crosshair"></div>
 
-    <section class="section">
-        <h1>My Portfolio</h1>
-    </section>
-    <section class="section">
-        <h2>My projects</h2>
-    </section>
-    <section class="section">
-        <h2>Contact me</h2>
-    </section>
+  <div class="container">
+    <div class="sidebar left-sidebar">
+      <h3>Compartment</h3>
+      <h3>Components</h3>
+      <h3>Modules</h3>
+      <div class="section-content" id="compartmentDropdowns"></div>
+    </div>
+  </div>
 
-    <script type="module" src="./script.js"></script>
+  <div class="sidebar right-sidebar">
+    <h3>Hull</h3>
+    <select id="hullDropdown"></select>
+    <h3>Shell</h3> 
+    <select id="shellDropdown"></select>
+    <div class="section">
+      <div class="section-content"></div>
+    </div>
+  </div>
+  
+  <div id="tooltip" class="tooltip"></div>
+  <script type="module" src="script.js"></script>
 </body>
 </html>

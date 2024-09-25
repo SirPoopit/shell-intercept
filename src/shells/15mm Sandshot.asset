@@ -1,0 +1,79 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 548285470, guid: 1e464caa2faff31494aed425945ecaa2, type: 3}
+  m_Name: 15mm Sandshot
+  m_EditorClassIdentifier:
+  _pointCost: 1
+  _pointDivision: 50
+  _storageVolume: 0.0025
+  _factionKey:
+  _flavorText: A small magnetic sled which is used to accelerate a collection of tungsten grains to incredible velocities.  Sandshot is extremely effective against missiles and other unprotected targets, but completely useless against warships.
+  _screenshot: {fileID: 0}
+  _tags:
+    Class: Ballistic/Magnetic
+    Subclass: 15mm
+  _role: 2
+  _weightClassDiscrepancy: 2
+  _maxFlightTime: 3.2
+  _flightSpeed: 250
+  _repoolDelay: 0
+  _armorPenetration: 3
+  _armorDamageRadius: 1
+  _heatPower: 1500
+  _componentDamage: 75
+  _randomEffectMultiplier: 0.05
+  _neverCrit: 0
+  _crewVulnerabilityMultiplier: 0.05
+  _maxPenetrationDistance: -1
+  _neverOverpen: 0
+  _overrideComponentSearchDistance: -1
+  _overpenDamageMultiplier: 0.15
+  _overpenDamageSpreadMethod: 0
+  _ignoreDamageReduction: 0
+  _alwaysSpreadDamage: 0
+  _forceBodyWakeup: 0
+  _applyImpulseOnImpact: 0
+  _impulseMagnitude: 0
+  _effectsGroups:
+    _surfaceGroups:
+    - _surfaceType:
+      _ricochetEffects:
+      - {fileID: 1022588935534865, guid: 965f65f8e70911e439f74c7412b29ce4, type: 2}
+      _impactEffects:
+      - {fileID: 1022588935534865, guid: 965f65f8e70911e439f74c7412b29ce4, type: 2}
+      _penetratingEffects:
+      - {fileID: 1941053805311407, guid: 81410e16a36121a41ab894baaee87886, type: 2}
+      _penetrationExitEffects: []
+      _destructionEffects: []
+  _modId: 0
+  _munitionName:
+  _munitionKey: 01baab8a-7e60-459d-bc42-7328aee6d0d3
+  _tracerEffect:
+    _effectAsset: {fileID: 2058629509, guid: ed7a720ce3ce8c8478a819f81fd039ff, type: 2}
+    _colors:
+    - Name: Color
+      Value: {r: 0, g: 95.87451, b: 54.211765, a: 1}
+    _gradients: []
+    _floats:
+    - Name: Lifetime
+      Value: 2.5
+  _whine: {fileID: 8300000, guid: ad040d0ae2b437f4ab891a8ef3bac582, type: 3}
+  _castType: 0
+  _spherecastRadius: 1
+  _rayAngle: 15
+  _rayCount: 5
+  _alwaysDoStructureDamage: 0
+  _dedicatedStructureDamage: 0
+  _alwaysSpreadThroughStructure: 0
+  _playDestructionEffectOnTimeout: 0
+  _lookaheadSphereRadius: 0.5
+  _includeMunitions: 1

@@ -1,0 +1,118 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1604615380, guid: 1e464caa2faff31494aed425945ecaa2, type: 3}
+  m_Name: 250mm AP Shell
+  m_EditorClassIdentifier:
+  _pointCost: 1
+  _pointDivision: 50
+  _storageVolume: 0.15
+  _factionKey:
+  _flavorText: Armor-piercing shells utilized by cannon weapons, such as the Mk6X series. Effective on light or medium-type warships, with acceptable performance on heavy-type warships.  Has increased effectiveness against penetrating or destroying hull armor, but lacks a high-explosive payload.
+  _screenshot: {fileID: 0}
+  _tags:
+    Class: Ballistic/Chemical
+    Subclass: 250mm
+  _role: 1
+  _weightClassDiscrepancy: 1
+  _maxFlightTime: 10
+  _flightSpeed: 80
+  _repoolDelay: 5
+  _armorPenetration: 60
+  _armorDamageRadius: 0.8
+  _heatPower: 0
+  _componentDamage: 70
+  _randomEffectMultiplier: 0.05
+  _neverCrit: 0
+  _crewVulnerabilityMultiplier: 0.75
+  _maxPenetrationDistance: -1
+  _neverOverpen: 0
+  _overrideComponentSearchDistance: 7
+  _overpenDamageMultiplier: 0.2
+  _overpenDamageSpreadMethod: 0
+  _ignoreDamageReduction: 0
+  _alwaysSpreadDamage: 0
+  _forceBodyWakeup: 0
+  _applyImpulseOnImpact: 0
+  _impulseMagnitude: 0
+  _effectsGroups:
+    _surfaceGroups:
+    - _surfaceType:
+      _ricochetEffects:
+      - {fileID: 1598311692184005, guid: 1e9a09ed243b9ce478963707f24a9160, type: 2}
+      _impactEffects:
+      - {fileID: 1754255569529339, guid: f2df6b746276b664a9db69b347e26f33, type: 2}
+      _penetratingEffects:
+      - {fileID: 1811668778246442, guid: 524c3fcc05cfaee468101b6f4eee4980, type: 2}
+      _penetrationExitEffects:
+      - {fileID: 1761169239029720, guid: 57d132c974d330643b401282d68c5d06, type: 2}
+      _destructionEffects: []
+    - _surfaceType: Surface-Rock
+      _ricochetEffects:
+      - {fileID: 1891976587770135, guid: 131a32f32d014b249a44d7f2652c7078, type: 2}
+      _impactEffects:
+      - {fileID: 1891976587770135, guid: 131a32f32d014b249a44d7f2652c7078, type: 2}
+      _penetratingEffects:
+      - {fileID: 1891976587770135, guid: 131a32f32d014b249a44d7f2652c7078, type: 2}
+      _penetrationExitEffects:
+      - {fileID: 1891976587770135, guid: 131a32f32d014b249a44d7f2652c7078, type: 2}
+      _destructionEffects: []
+  _modId: 0
+  _munitionName:
+  _munitionKey: b3f80a81-d77b-48e6-bca4-7482ee287de5
+  _tracerEffect:
+    _effectAsset: {fileID: 2058629509, guid: 2538a9c369d638c4ba37bf230eb9a460, type: 2}
+    _colors: []
+    _gradients:
+    - Name: Color
+      Value:
+        serializedVersion: 2
+        key0: {r: 63.534218, g: 67.793495, b: 0, a: 1}
+        key1: {r: 63.534218, g: 67.793495, b: 0, a: 0.9577465}
+        key2: {r: 1.3041189, g: 1.3041189, b: 1.3041189, a: 0.25882354}
+        key3: {r: 0.7490196, g: 0.7490196, b: 0.7490196, a: 0}
+        key4: {r: 0, g: 0, b: 0, a: 0}
+        key5: {r: 0, g: 0, b: 0, a: 0}
+        key6: {r: 0, g: 0, b: 0, a: 0}
+        key7: {r: 0, g: 0, b: 0, a: 0}
+        ctime0: 0
+        ctime1: 870
+        ctime2: 1214
+        ctime3: 2506
+        ctime4: 0
+        ctime5: 0
+        ctime6: 0
+        ctime7: 0
+        atime0: 0
+        atime1: 1300
+        atime2: 2341
+        atime3: 65535
+        atime4: 0
+        atime5: 0
+        atime6: 0
+        atime7: 0
+        m_Mode: 0
+        m_NumColorKeys: 3
+        m_NumAlphaKeys: 4
+    _floats:
+    - Name: Width
+      Value: 0.2
+    - Name: Lifetime
+      Value: 2.5
+  _whine: {fileID: 8300000, guid: cce72793e6d445f4ab08d11a72c7dd0c, type: 3}
+  _castType: 2
+  _spherecastRadius: 1
+  _rayAngle: 30
+  _rayCount: 8
+  _alwaysDoStructureDamage: 0
+  _dedicatedStructureDamage: 0
+  _alwaysSpreadThroughStructure: 0
+  _playDestructionEffectOnTimeout: 0
