@@ -9,44 +9,37 @@ body {
     padding: 0;
     overflow: hidden;
     background-color: black;
-    font-family: Arial, sans-serif;
     color: white;
 	font-family: 'bombardier', sans-serif;
 }
 
-/* Top Bar */
-.top-bar {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 50px;
-    background-color: #1a1a1a;
-    color: #fff;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 50px;
-    z-index: 10;
-}
 
-/* Sidebars */
-.sidebar {
-    position: absolute;
-    top: 100px;  /* Adjusted to fit below the top bar */
-    bottom: 0;
-    width: 300px;
-    background-color: #202020;
-    padding: 10px;
-    overflow-y: auto;
-}
+
 
 .left-sidebar {
     left: 0;
+	height: 88%;
+	/* image: url('pngs/Group_Header_Orange.png'); */
+	position: absolute;
+    bottom: 0;
+	width: 16%;
+    background-color: #202020;
+    padding: 10px;
+    overflow-y: auto;
+	border: 1px solid #525452
 }
 
 .right-sidebar {
     right: 0;
+	height: 88%;
+	/* image: url('pngs/Group_Header_Orange.png'); */
+	position: absolute;
+    bottom: 0;
+	width: 16%;
+    background-color: #202020;
+    padding: 10px;
+    overflow-y: auto;
+	border: 1px solid #525452
 }
 
 
@@ -59,6 +52,11 @@ select {
     background-color: #2a2a2a;
     color: #fff;
     border: 1px solid #555;
+	background-position: left center;
+    background-repeat: no-repeat;
+    background-size: 144px;
+    padding-left: 25px;
+    font-family: 'bombardier', sans-serif;
 }
 
 
@@ -97,11 +95,55 @@ select {
       transform: translateY(-50%);
     }
 	
-	
-	select {
-  background-position: left center;
-  background-repeat: no-repeat;
-  background-size: 144px;
-  padding-left: 25px;
-  font-family: 'bombardier', sans-serif;
+
+/* Container for the ray log */
+.ray-log-container {
+	/* background-image: url('path/to/box-background.png'); */
+    position: absolute;
+    top: 5px;
+    left: 16%; /* Middle third */
+    width: 66%; /* Middle third */
+	height: 12%;
+    display: flex;
+    padding: 5px;
+    background-color: #080808;
+	border: 1px solid #525452;
+}
+
+/* Individual ray boxes */
+.ray-box {
+	/* background-image: url('pngs/Supertitle_Portrait_Frame.png'); */
+    /* padding: 5px 10px; */
+    cursor: pointer;
+    margin: 0 5px;
+	border: 1px solid #525452;
+}
+
+/* When a ray is hidden, add a different style */
+.ray-box.hidden-ray {
+	/* background-image: url('path/to/box-background.png'); */
+    background-color: #ccc;
+    color: #666;
+    text-decoration: line-through;
+}
+
+
+.expandable-menu {
+  margin-bottom: 10px;
+}
+
+.expandable-header {
+  background-color: #444;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.expandable-content {
+  display: none;
+  padding: 10px;
+  background-color: #333;
+}
+
+.expandable-menu.active .expandable-content {
+  display: block;
 }

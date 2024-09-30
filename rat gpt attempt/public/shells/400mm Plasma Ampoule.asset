@@ -1,0 +1,185 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 938080528, guid: 1e464caa2faff31494aed425945ecaa2, type: 3}
+  m_Name: 400mm Plasma Ampoule
+  m_EditorClassIdentifier:
+  _pointCost: 1
+  _pointDivision: 25
+  _storageVolume: 0.8
+  _factionKey: Stock/Protectorate
+  _flavorText: A magnetic bottle containing a quantity of plasma within its field.  When propelled at an enemy ship by a coilgun it shatters on impact, melting large swathes of armor away.  The plasma contained in the bottle is heated by induction immediately before firing and cools in flight, giving this weapon its highest damage potential at ranges less than 4km.
+  _screenshot: {fileID: 0}
+  _tags:
+    Class: Ballistic/Magnetic
+    Subclass: 400mm Ampoule
+  _role: 1
+  _weightClassDiscrepancy: 1
+  _maxFlightTime: 12
+  _flightSpeed: 60
+  _repoolDelay: 5
+  _armorPenetration: 60
+  _armorDamageRadius: 3
+  _heatPower: 500
+  _componentDamage: 60
+  _randomEffectMultiplier: 0.25
+  _neverCrit: 0
+  _crewVulnerabilityMultiplier: 1
+  _maxPenetrationDistance: 0
+  _neverOverpen: 0
+  _overrideComponentSearchDistance: -1
+  _overpenDamageMultiplier: 0.2
+  _overpenDamageSpreadMethod: 0
+  _ignoreDamageReduction: 0
+  _alwaysSpreadDamage: 1
+  _forceBodyWakeup: 0
+  _applyImpulseOnImpact: 0
+  _impulseMagnitude: 0
+  _effectsGroups:
+    _surfaceGroups:
+    - _surfaceType:
+      _ricochetEffects:
+      - {fileID: 1786357677850066, guid: 1a8c94f66b5c8a942bfc2bd1f880e64c, type: 2}
+      _impactEffects:
+      - {fileID: 1779247676743582, guid: 486576b431e6f424a877cd3f4fa30896, type: 2}
+      _penetratingEffects:
+      - {fileID: 1779247676743582, guid: 486576b431e6f424a877cd3f4fa30896, type: 2}
+      _penetrationExitEffects:
+      - {fileID: 1059471753012796, guid: 977ba4401cc4a1a498c042e4be85c27a, type: 2}
+      _destructionEffects: []
+    - _surfaceType: Surface-Rock
+      _ricochetEffects:
+      - {fileID: 1779247676743582, guid: 486576b431e6f424a877cd3f4fa30896, type: 2}
+      _impactEffects:
+      - {fileID: 1779247676743582, guid: 486576b431e6f424a877cd3f4fa30896, type: 2}
+      _penetratingEffects:
+      - {fileID: 1779247676743582, guid: 486576b431e6f424a877cd3f4fa30896, type: 2}
+      _penetrationExitEffects:
+      - {fileID: 1779247676743582, guid: 486576b431e6f424a877cd3f4fa30896, type: 2}
+      _destructionEffects: []
+  _modId: 0
+  _munitionName:
+  _munitionKey: 94590fc6-5f4d-4f20-98c9-cc4eadbdabe9
+  _tracerEffect:
+    _effectAsset: {fileID: 2058629509, guid: 2bfe969965e291b4abce5f39598905d9, type: 2}
+    _colors:
+    - Name: Dust Color
+      Value: {r: 27.010477, g: 0, b: 67.000015, a: 1}
+    - Name: Cool Dust Color
+      Value: {r: 7.378317, g: 0, b: 67.000015, a: 1}
+    _gradients:
+    - Name: Color
+      Value:
+        serializedVersion: 2
+        key0: {r: 27.825386, g: 0, b: 67.793495, a: 1}
+        key1: {r: 7.5602856, g: 0, b: 67.793495, a: 0.9577465}
+        key2: {r: 1, g: 1, b: 1, a: 0.25882354}
+        key3: {r: 0, g: 0, b: 0, a: 0}
+        key4: {r: 0, g: 0, b: 0, a: 0}
+        key5: {r: 0, g: 0, b: 0, a: 0}
+        key6: {r: 0, g: 0, b: 0, a: 0}
+        key7: {r: 0, g: 0, b: 0, a: 0}
+        ctime0: 0
+        ctime1: 12359
+        ctime2: 14186
+        ctime3: 0
+        ctime4: 0
+        ctime5: 0
+        ctime6: 0
+        ctime7: 0
+        atime0: 0
+        atime1: 10966
+        atime2: 14621
+        atime3: 65535
+        atime4: 0
+        atime5: 0
+        atime6: 0
+        atime7: 0
+        m_Mode: 0
+        m_NumColorKeys: 3
+        m_NumAlphaKeys: 4
+    - Name: Cool Color
+      Value:
+        serializedVersion: 2
+        key0: {r: 0.15930478, g: 0, b: 67.793495, a: 1}
+        key1: {r: 1, g: 1, b: 1, a: 0.9577465}
+        key2: {r: 1, g: 1, b: 1, a: 0.25882354}
+        key3: {r: 0, g: 0, b: 0, a: 0}
+        key4: {r: 0, g: 0, b: 0, a: 0}
+        key5: {r: 0, g: 0, b: 0, a: 0}
+        key6: {r: 0, g: 0, b: 0, a: 0}
+        key7: {r: 0, g: 0, b: 0, a: 0}
+        ctime0: 0
+        ctime1: 13577
+        ctime2: 14186
+        ctime3: 0
+        ctime4: 0
+        ctime5: 0
+        ctime6: 0
+        ctime7: 0
+        atime0: 0
+        atime1: 13055
+        atime2: 15405
+        atime3: 65535
+        atime4: 0
+        atime5: 0
+        atime6: 0
+        atime7: 0
+        m_Mode: 0
+        m_NumColorKeys: 2
+        m_NumAlphaKeys: 4
+    _floats:
+    - Name: Width
+      Value: 0.3
+    - Name: Lifetime
+      Value: 2.5
+    - Name: Cooling Time
+      Value: 14
+  _whine: {fileID: 8300000, guid: 2b1471c36b6c1f54daff37f4a37c0c04, type: 3}
+  _castType: 1
+  _spherecastRadius: 2
+  _rayAngle: 15
+  _rayCount: 5
+  _alwaysDoStructureDamage: 0
+  _dedicatedStructureDamage: 0
+  _alwaysSpreadThroughStructure: 0
+  _playDestructionEffectOnTimeout: 0
+  _armorSplashRadius: 0.75
+  _radiusJitter: 0.1
+  _splashRayCount: 8
+  _backoffDistance: 1
+  _splashRayLength: 3
+  _armorDamageFallsOff: 1
+  _componentDamageFallsOff: 1
+  _damageFalloff:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 0.2999878
+      inSlope: -2.0019722
+      outSlope: -2.0019722
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.041297913
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4

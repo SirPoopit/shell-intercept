@@ -1,34 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>3D Model Viewer</title>
-  <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Three.js Scene</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div class="crosshair"></div>
-
-  <div class="container">
-    <div class="sidebar left-sidebar">
-      <h3>Compartment</h3>
-      <h3>Components</h3>
-      <h3>Modules</h3>
-      <div class="section-content" id="compartmentDropdowns"></div>
+    <script type="module" src="script.js"></script>
+	<div class="crosshair"></div>
+	
+    <div class="right-sidebar">
+	 <select id="hullDropdown"></select>
+     <select id="shellDropdown"></select>
     </div>
-  </div>
 
-  <div class="sidebar right-sidebar">
-    <h3>Hull</h3>
-    <select id="hullDropdown"></select>
-    <h3>Shell</h3> 
-    <select id="shellDropdown"></select>
-    <div class="section">
-      <div class="section-content"></div>
+
+
+
+	 <div id="ray-log-container">
+
+	</div>
+
+
+
+
+
+    <div class="left-sidebar">
+
+    <div class="dropdown-container">
+        <div class="expandable-header">Mounting</div>
+        <div class="expandable-menu" id="mountingDropdowns">
+            <!-- Dynamic content for Mounting Dropdowns -->
+        </div>
+
+        <div class="expandable-header">Component</div>
+        <div class="expandable-menu" id="componentDropdowns">
+            <!-- Dynamic content for Component Dropdowns -->
+        </div>
+
+        <div class="expandable-header">Module</div>
+        <div class="expandable-menu" id="moduleDropdowns">
+            <!-- Dynamic content for Module Dropdowns -->
+        </div>
     </div>
-  </div>
-  
-  <div id="tooltip" class="tooltip"></div>
-  <script type="module" src="script.js"></script>
+
+
 </body>
 </html>

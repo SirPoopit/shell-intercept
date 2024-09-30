@@ -1,0 +1,125 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1604615380, guid: 1e464caa2faff31494aed425945ecaa2, type: 3}
+  m_Name: 500mm Fracturing Block
+  m_EditorClassIdentifier:
+  _pointCost: 1
+  _pointDivision: 25
+  _storageVolume: 0.75
+  _factionKey: Stock/Protectorate
+  _flavorText: "Fracturing blocks are commonly used in asteroid mining to burrow into large rocks or to shatter smaller ones contained in a net.  They are accelerated to high velocity by mass drivers and produce tremendous force on impact.\n\nUnlike the Alliance's weaponized mass drivers, these variants are blunt rectangles of tungsten and are not designed to punch clean through heavy armor.  Instead, they fragment on impact and produce a large explosion akin to a missile warhead."
+  _screenshot: {fileID: 0}
+  _tags:
+    Class: Ballistic/Magnetic
+    Subclass: 500mm
+  _role: 1
+  _weightClassDiscrepancy: 1
+  _maxFlightTime: 10.5
+  _flightSpeed: 200
+  _repoolDelay: 5
+  _armorPenetration: 120
+  _armorDamageRadius: 1.5
+  _heatPower: 1500
+  _componentDamage: 300
+  _randomEffectMultiplier: 0.05
+  _neverCrit: 1
+  _crewVulnerabilityMultiplier: 0.05
+  _maxPenetrationDistance: 3
+  _neverOverpen: 0
+  _overrideComponentSearchDistance: -1
+  _overpenDamageMultiplier: 0.2
+  _overpenDamageSpreadMethod: 1
+  _ignoreDamageReduction: 1
+  _alwaysSpreadDamage: 0
+  _forceBodyWakeup: 1
+  _applyImpulseOnImpact: 1
+  _impulseMagnitude: 20
+  _effectsGroups:
+    _surfaceGroups:
+    - _surfaceType:
+      _ricochetEffects:
+      - {fileID: 1005441417936131, guid: 1faf85bf834404f4fa4fee9f8c9d2706, type: 2}
+      _impactEffects:
+      - {fileID: 1867366672165352, guid: 0563a7974164eec449c2433104a14005, type: 2}
+      - {fileID: 1791113638022728, guid: 0d977cd2f6f5db44da2e57fab9ba6c97, type: 2}
+      - {fileID: 1535764545227934, guid: 0cb14a799e763a141ac6ff75c27e279a, type: 2}
+      _penetratingEffects:
+      - {fileID: 1867366672165352, guid: 0563a7974164eec449c2433104a14005, type: 2}
+      - {fileID: 1791113638022728, guid: 0d977cd2f6f5db44da2e57fab9ba6c97, type: 2}
+      - {fileID: 1535764545227934, guid: 0cb14a799e763a141ac6ff75c27e279a, type: 2}
+      _penetrationExitEffects:
+      - {fileID: 1309535347815620, guid: 7e8322cff7d75e444a80d9a6479b891e, type: 2}
+      _destructionEffects:
+      - {fileID: 1329504587783724, guid: 13c10578223bfe744b07907fe5f82818, type: 2}
+    - _surfaceType: Surface-Rock
+      _ricochetEffects:
+      - {fileID: 1770856447887537, guid: 953cdd4739be99c44bb598b09e64a756, type: 2}
+      _impactEffects:
+      - {fileID: 1770856447887537, guid: 953cdd4739be99c44bb598b09e64a756, type: 2}
+      _penetratingEffects:
+      - {fileID: 1770856447887537, guid: 953cdd4739be99c44bb598b09e64a756, type: 2}
+      _penetrationExitEffects:
+      - {fileID: 1770856447887537, guid: 953cdd4739be99c44bb598b09e64a756, type: 2}
+      _destructionEffects: []
+  _modId: 0
+  _munitionName:
+  _munitionKey: 01844b1c-3d4d-473b-a2c2-0f76200742a3
+  _tracerEffect:
+    _effectAsset: {fileID: 2058629509, guid: 7d5f8e25e74328f4d997595d0ba94b69, type: 2}
+    _colors:
+    - Name: Shock Color
+      Value: {r: 1.098599, g: 2.948139, b: 2.834571, a: 0.105882354}
+    _gradients:
+    - Name: Color
+      Value:
+        serializedVersion: 2
+        key0: {r: 0, g: 11.984314, b: 6.7764707, a: 1}
+        key1: {r: 0.0627451, g: 5.992157, b: 3.4196079, a: 0.9577465}
+        key2: {r: 1, g: 1, b: 1, a: 0.25882354}
+        key3: {r: 1, g: 1, b: 1, a: 0}
+        key4: {r: 0, g: 0, b: 0, a: 0}
+        key5: {r: 0, g: 0, b: 0, a: 0}
+        key6: {r: 0, g: 0, b: 0, a: 0}
+        key7: {r: 0, g: 0, b: 0, a: 0}
+        ctime0: 0
+        ctime1: 6357
+        ctime2: 8288
+        ctime3: 8288
+        ctime4: 0
+        ctime5: 0
+        ctime6: 0
+        ctime7: 0
+        atime0: 0
+        atime1: 964
+        atime2: 11575
+        atime3: 65535
+        atime4: 0
+        atime5: 0
+        atime6: 0
+        atime7: 0
+        m_Mode: 0
+        m_NumColorKeys: 3
+        m_NumAlphaKeys: 4
+    _floats:
+    - Name: Width
+      Value: 0.6
+    - Name: Lifetime
+      Value: 2.5
+  _whine: {fileID: 8300000, guid: 0f90fb865b2c8954bbb0599355743578, type: 3}
+  _castType: 3
+  _spherecastRadius: 0.25
+  _rayAngle: 35
+  _rayCount: 20
+  _alwaysDoStructureDamage: 0
+  _dedicatedStructureDamage: 0
+  _alwaysSpreadThroughStructure: 0
+  _playDestructionEffectOnTimeout: 0

@@ -1,0 +1,99 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1604615380, guid: ed7bf313b5d0b5446af45ecfa2e409ac, type: 3}
+  m_Name: 35mm AP Rail Pinshot
+  m_EditorClassIdentifier: 
+  _pointCost: 1
+  _pointDivision: 50
+  _storageVolume: 0.05
+  _factionKey: Falcata Republic/Falcata Republic
+  _flavorText: "35mm Pinshot for use by Falcatan rail weaponry. High penetration,
+    middling damage. Good for finishing off components on enemy capital ships. \n"
+  _screenshot: {fileID: 0}
+  _tags:
+    Class: Ballistic/Magnetic
+    Subclass: 35mm
+  _role: 1
+  _weightClassDiscrepancy: 1
+  _maxFlightTime: 8
+  _flightSpeed: 200
+  _repoolDelay: 5
+  _armorPenetration: 145
+  _armorDamageRadius: 0.2
+  _heatPower: 500
+  _componentDamage: 50
+  _randomEffectMultiplier: 0.1
+  _neverCrit: 0
+  _crewVulnerabilityMultiplier: 0.75
+  _maxPenetrationDistance: -1
+  _neverOverpen: 0
+  _overrideComponentSearchDistance: 7
+  _overpenDamageMultiplier: 0.55
+  _overpenDamageSpreadMethod: 0
+  _ignoreDamageReduction: 0
+  _alwaysSpreadDamage: 0
+  _forceBodyWakeup: 0
+  _applyImpulseOnImpact: 0
+  _impulseMagnitude: 0
+  _effectsGroups:
+    _surfaceGroups: []
+  _modId: 0
+  _munitionName: 
+  _munitionKey: f77dcffe-99c2-4ef6-8288-96617a1870ea
+  _tracerEffect:
+    _effectAsset: {fileID: 0}
+    _colors: []
+    _gradients:
+    - Name: Color
+      Value:
+        serializedVersion: 2
+        key0: {r: 1.5058796, g: 95.87451, b: 60.568443, a: 1}
+        key1: {r: 1.967017, g: 75.14007, b: 29.811445, a: 0.9577465}
+        key2: {r: 1, g: 1, b: 1, a: 0.25882354}
+        key3: {r: 0, g: 0, b: 0, a: 0}
+        key4: {r: 0, g: 0, b: 0, a: 0}
+        key5: {r: 0, g: 0, b: 0, a: 0}
+        key6: {r: 0, g: 0, b: 0, a: 0}
+        key7: {r: 0, g: 0, b: 0, a: 0}
+        ctime0: 0
+        ctime1: 2521
+        ctime2: 3781
+        ctime3: 0
+        ctime4: 0
+        ctime5: 0
+        ctime6: 0
+        ctime7: 0
+        atime0: 0
+        atime1: 964
+        atime2: 11575
+        atime3: 65535
+        atime4: 0
+        atime5: 0
+        atime6: 0
+        atime7: 0
+        m_Mode: 0
+        m_NumColorKeys: 3
+        m_NumAlphaKeys: 4
+    _floats:
+    - Name: Width
+      Value: 0.15
+    - Name: Lifetime
+      Value: 1.7
+  _whine: {fileID: 8300000, guid: 3a3519090b043e04d8b1a7bedbd19371, type: 3}
+  _castType: 2
+  _spherecastRadius: 1
+  _rayAngle: 10
+  _rayCount: 5
+  _alwaysDoStructureDamage: 0
+  _dedicatedStructureDamage: 0
+  _alwaysSpreadThroughStructure: 0
+  _playDestructionEffectOnTimeout: 0

@@ -1,0 +1,26 @@
+20mm Slug
+35mm AP Rail Pinshot
+100mm AP Shell
+100mm Grape
+100mm HE Shell
+100mm HE-HC Shell
+120mm AP Shell
+120mm HE Shell
+120mm HE-RPF Shell
+150mm Flak Shell
+150mm AP-S Shell
+150mm HE Shell
+200mm RP-HEI Shell
+220mm AP Shell
+250mm AP Shell
+250mm HE Shell
+250mm HE-RPF Shell
+300mm AP Rail Sabot
+400mm Plasma Ampoule
+450mm AP Shell
+450mm HE Shell
+500mm Fracturing Block
+600mm Bomb Shell
+600mm HE-SH Shell
+700mm KART-HEI Shell
+700mm KART-KP Shell

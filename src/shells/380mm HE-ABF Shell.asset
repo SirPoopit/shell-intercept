@@ -1,0 +1,110 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1122555169, guid: ed7bf313b5d0b5446af45ecfa2e409ac, type: 3}
+  m_Name: 380mm HE-ABF Shell
+  m_EditorClassIdentifier: 
+  _pointCost: 1
+  _pointDivision: 50
+  _storageVolume: 0.35
+  _factionKey: Falcata Republic/Falcata Republic
+  _flavorText: High-explosive rounds utilized by medium-heavy cannon weapons, such
+    as the Mk6X series. Effective on light or medium-type warships.  This round features
+    a special timed fuze which will detonate the shell after a period of time has
+    passed. This makes it somewhat useful against smaller ships, however a timed
+    fuze instead of a proximity fuze makes it somewhat less effective than its AN
+    counterpart.
+  _screenshot: {fileID: 0}
+  _tags:
+    Class: Ballistic/Chemical
+    Subclass: 380mm
+  _role: 3
+  _weightClassDiscrepancy: 2
+  _maxFlightTime: 14.4
+  _flightSpeed: 75
+  _repoolDelay: 5
+  _armorPenetration: 25
+  _armorDamageRadius: 0.5
+  _heatPower: 5
+  _componentDamage: 25
+  _randomEffectMultiplier: 0.05
+  _neverCrit: 0
+  _crewVulnerabilityMultiplier: 0.1
+  _maxPenetrationDistance: 5
+  _neverOverpen: 0
+  _overrideComponentSearchDistance: -1
+  _overpenDamageMultiplier: 0.2
+  _overpenDamageSpreadMethod: 0
+  _ignoreDamageReduction: 0
+  _alwaysSpreadDamage: 0
+  _forceBodyWakeup: 0
+  _applyImpulseOnImpact: 0
+  _impulseMagnitude: 0
+  _effectsGroups:
+    _surfaceGroups: []
+  _modId: 0
+  _munitionName: 
+  _munitionKey: ca07276d-443b-4588-b9ec-dbbd2c785e32
+  _tracerEffect:
+    _effectAsset: {fileID: 0}
+    _colors: []
+    _gradients:
+    - Name: Color
+      Value:
+        serializedVersion: 2
+        key0: {r: 271.17407, g: 0, b: 0, a: 1}
+        key1: {r: 135.58699, g: 0, b: 0, a: 0.9577465}
+        key2: {r: 1, g: 1, b: 1, a: 0.25882354}
+        key3: {r: 0, g: 0, b: 0, a: 0}
+        key4: {r: 0, g: 0, b: 0, a: 0}
+        key5: {r: 0, g: 0, b: 0, a: 0}
+        key6: {r: 0, g: 0, b: 0, a: 0}
+        key7: {r: 0, g: 0, b: 0, a: 0}
+        ctime0: 0
+        ctime1: 870
+        ctime2: 1214
+        ctime3: 0
+        ctime4: 0
+        ctime5: 0
+        ctime6: 0
+        ctime7: 0
+        atime0: 0
+        atime1: 1300
+        atime2: 2341
+        atime3: 65535
+        atime4: 0
+        atime5: 0
+        atime6: 0
+        atime7: 0
+        m_Mode: 0
+        m_NumColorKeys: 3
+        m_NumAlphaKeys: 4
+    _floats:
+    - Name: Width
+      Value: 0.28
+    - Name: Lifetime
+      Value: 2.5
+  _whine: {fileID: 8300000, guid: 3a3519090b043e04d8b1a7bedbd19371, type: 3}
+  _castType: 0
+  _spherecastRadius: 1
+  _rayAngle: 15
+  _rayCount: 3
+  _alwaysDoStructureDamage: 0
+  _dedicatedStructureDamage: 0
+  _alwaysSpreadThroughStructure: 0
+  _playDestructionEffectOnTimeout: 1
+  _fuzeMargin: 0.35
+  _minFuzeTime: 0.75
+  _fuzeAdvanceRetard: -0.2
+  _blastRadius: 25
+  _fragmentCountPerTarget: 4
+  _fragmentSearchDistance: 5
+  _damagePotentialMaxHits: 5

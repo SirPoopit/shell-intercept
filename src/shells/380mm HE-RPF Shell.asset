@@ -1,0 +1,113 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1280769915, guid: ed7bf313b5d0b5446af45ecfa2e409ac, type: 3}
+  m_Name: 380mm HE-RPF Shell
+  m_EditorClassIdentifier: 
+  _pointCost: 1
+  _pointDivision: 50
+  _storageVolume: 0.35
+  _factionKey: Falcata Republic/Falcata Republic
+  _flavorText: 'High-explosive rounds utilized by medium-heavy cannon weapons, such
+    as the Mk6X series. Effective on light or medium-type warships.  This round features
+    a special Radio Proximity Fuze which will detonate the shell if it detects an
+    object in its path, greatly increasing its effectiveness against fast, maneuvering,
+    small targets like corvettes and frigates.
+
+
+    This RPF shell, being large
+    and unweildy, is unable to be used for dedicated defensive anti-missile purposes.
+    However, if a missile is caught in the blast, it will likely not escape unharmed.'
+  _screenshot: {fileID: 0}
+  _tags:
+    Class: Ballistic/Chemical
+    Subclass: 380mm
+  _role: 3
+  _weightClassDiscrepancy: 2
+  _maxFlightTime: 9
+  _flightSpeed: 90
+  _repoolDelay: 5
+  _armorPenetration: 28
+  _armorDamageRadius: 0.45
+  _heatPower: 0
+  _componentDamage: 17
+  _randomEffectMultiplier: 0.05
+  _neverCrit: 0
+  _crewVulnerabilityMultiplier: 1
+  _maxPenetrationDistance: -1
+  _neverOverpen: 0
+  _overrideComponentSearchDistance: 5
+  _overpenDamageMultiplier: 2.5
+  _overpenDamageSpreadMethod: 0
+  _ignoreDamageReduction: 0
+  _alwaysSpreadDamage: 0
+  _forceBodyWakeup: 0
+  _applyImpulseOnImpact: 0
+  _impulseMagnitude: 0
+  _effectsGroups:
+    _surfaceGroups: []
+  _modId: 0
+  _munitionName: 
+  _munitionKey: e1995380-1ad1-40c6-acce-a827d321dba1
+  _tracerEffect:
+    _effectAsset: {fileID: 0}
+    _colors: []
+    _gradients:
+    - Name: Color
+      Value:
+        serializedVersion: 2
+        key0: {r: 271.17407, g: 0, b: 0, a: 1}
+        key1: {r: 135.58699, g: 0, b: 0, a: 0.9577465}
+        key2: {r: 1, g: 1, b: 1, a: 0.25882354}
+        key3: {r: 0, g: 0, b: 0, a: 0}
+        key4: {r: 0, g: 0, b: 0, a: 0}
+        key5: {r: 0, g: 0, b: 0, a: 0}
+        key6: {r: 0, g: 0, b: 0, a: 0}
+        key7: {r: 0, g: 0, b: 0, a: 0}
+        ctime0: 0
+        ctime1: 870
+        ctime2: 1214
+        ctime3: 0
+        ctime4: 0
+        ctime5: 0
+        ctime6: 0
+        ctime7: 0
+        atime0: 0
+        atime1: 1300
+        atime2: 2341
+        atime3: 65535
+        atime4: 0
+        atime5: 0
+        atime6: 0
+        atime7: 0
+        m_Mode: 0
+        m_NumColorKeys: 3
+        m_NumAlphaKeys: 4
+    _floats:
+    - Name: Width
+      Value: 0.25
+    - Name: Lifetime
+      Value: 2.5
+  _whine: {fileID: 8300000, guid: 3a3519090b043e04d8b1a7bedbd19371, type: 3}
+  _castType: 0
+  _spherecastRadius: 1
+  _rayAngle: 10
+  _rayCount: 2
+  _alwaysDoStructureDamage: 0
+  _dedicatedStructureDamage: 0
+  _alwaysSpreadThroughStructure: 0
+  _playDestructionEffectOnTimeout: 0
+  _armDelay: 0.5
+  _triggerRadius: 2.5
+  _includeMunitions: 1
+  _expRayCount: 4
+  _expRayAngle: 10
+  _expRayLength: 22

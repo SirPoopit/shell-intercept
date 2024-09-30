@@ -1,0 +1,125 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1814120666, guid: 1e464caa2faff31494aed425945ecaa2, type: 3}
+  m_Name: Flak Round
+  m_EditorClassIdentifier:
+  _pointCost: 1
+  _pointDivision: 75
+  _storageVolume: 0.01
+  _factionKey:
+  _flavorText: 50mm high-explosive fragmentation round with tracer, used in flak guns such as the Rebound. Designed to destroy small threats like missiles, drones, and fighters.
+  _screenshot: {fileID: 0}
+  _tags:
+    Class: Ballistic/Chemical/Timed
+    Subclass: 50mm
+  _role: 2
+  _weightClassDiscrepancy: 2
+  _maxFlightTime: 3.08
+  _flightSpeed: 65
+  _repoolDelay: 1
+  _armorPenetration: 1
+  _armorDamageRadius: 0.2
+  _heatPower: 0
+  _componentDamage: 15
+  _randomEffectMultiplier: 0.1
+  _neverCrit: 0
+  _crewVulnerabilityMultiplier: 0.1
+  _maxPenetrationDistance: 0.2
+  _neverOverpen: 0
+  _overrideComponentSearchDistance: -1
+  _overpenDamageMultiplier: 0.2
+  _overpenDamageSpreadMethod: 0
+  _ignoreDamageReduction: 0
+  _alwaysSpreadDamage: 0
+  _forceBodyWakeup: 0
+  _applyImpulseOnImpact: 0
+  _impulseMagnitude: 0
+  _effectsGroups:
+    _surfaceGroups:
+    - _surfaceType:
+      _ricochetEffects:
+      - {fileID: 1598311692184005, guid: 1e9a09ed243b9ce478963707f24a9160, type: 2}
+      _impactEffects:
+      - {fileID: 1719169793012384, guid: 12469e0f468b3e14a818f8fbe75c2ac9, type: 2}
+      _penetratingEffects:
+      - {fileID: 1719169793012384, guid: 12469e0f468b3e14a818f8fbe75c2ac9, type: 2}
+      _penetrationExitEffects: []
+      _destructionEffects:
+      - {fileID: 1980839678356569, guid: 571eef5ce61936f40a19af030b7920eb, type: 2}
+    - _surfaceType: Surface-Rock
+      _ricochetEffects:
+      - {fileID: 1891976587770135, guid: 131a32f32d014b249a44d7f2652c7078, type: 2}
+      _impactEffects:
+      - {fileID: 1891976587770135, guid: 131a32f32d014b249a44d7f2652c7078, type: 2}
+      _penetratingEffects:
+      - {fileID: 1891976587770135, guid: 131a32f32d014b249a44d7f2652c7078, type: 2}
+      _penetrationExitEffects:
+      - {fileID: 1891976587770135, guid: 131a32f32d014b249a44d7f2652c7078, type: 2}
+      _destructionEffects: []
+  _modId: 0
+  _munitionName:
+  _munitionKey: 0b0a613d-6545-4f41-a6db-a2c91ba77ef6
+  _tracerEffect:
+    _effectAsset: {fileID: 2058629509, guid: 2538a9c369d638c4ba37bf230eb9a460, type: 2}
+    _colors: []
+    _gradients:
+    - Name: Color
+      Value:
+        serializedVersion: 2
+        key0: {r: 10.077567, g: 0.1582864, b: 0, a: 1}
+        key1: {r: 4.832489, g: 0.46587637, b: 0, a: 1}
+        key2: {r: 0, g: 0, b: 0, a: 0}
+        key3: {r: 0, g: 0, b: 0, a: 0}
+        key4: {r: 0, g: 0, b: 0, a: 0}
+        key5: {r: 0, g: 0, b: 0, a: 0}
+        key6: {r: 0, g: 0, b: 0, a: 0}
+        key7: {r: 0, g: 0, b: 0, a: 0}
+        ctime0: 0
+        ctime1: 65535
+        ctime2: 0
+        ctime3: 0
+        ctime4: 0
+        ctime5: 0
+        ctime6: 0
+        ctime7: 0
+        atime0: 0
+        atime1: 52428
+        atime2: 65535
+        atime3: 0
+        atime4: 0
+        atime5: 0
+        atime6: 0
+        atime7: 0
+        m_Mode: 0
+        m_NumColorKeys: 2
+        m_NumAlphaKeys: 3
+    _floats:
+    - Name: Width
+      Value: 0.075
+    - Name: Lifetime
+      Value: 0.15
+    - Name: Bounds Length
+      Value: 100
+    - Name: Turbulence Intensity
+      Value: 1
+  _whine: {fileID: 8300000, guid: cce72793e6d445f4ab08d11a72c7dd0c, type: 3}
+  _castType: 0
+  _spherecastRadius: 1
+  _rayAngle: 15
+  _rayCount: 5
+  _alwaysDoStructureDamage: 0
+  _dedicatedStructureDamage: 0
+  _alwaysSpreadThroughStructure: 0
+  _playDestructionEffectOnTimeout: 1
+  _fuzeMargin: 0.1
+  _minFuzeTime: 0.5
+  _fuzeAdvanceRetard: -0.1

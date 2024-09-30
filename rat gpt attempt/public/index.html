@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>3D Model Viewer</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="crosshair"></div>
+
+  <div class="container">
+    <div class="sidebar left-sidebar">
+      <h3>Mounting</h3>
+      <div class="collapsible" id="mountingSection">
+        <div class="collapsible-header" onclick="toggleCollapsible('mountingContent')">Mounting Options</div>
+        <div class="collapsible-content" id="mountingContent"></div>
+      </div>
+
+      <h3>Compartment</h3>
+      <div class="collapsible" id="compartmentSection">
+        <div class="collapsible-header" onclick="toggleCollapsible('compartmentContent')">Compartment Options</div>
+        <div class="collapsible-content" id="compartmentContent"></div>
+      </div>
+
+      <h3>Module</h3>
+      <div class="collapsible" id="moduleSection">
+        <div class="collapsible-header" onclick="toggleCollapsible('moduleContent')">Module Options</div>
+        <div class="collapsible-content" id="moduleContent"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sidebar right-sidebar">
+    <h3>Hull</h3>
+    <select id="hullDropdown"></select>
+    <h3>Shell</h3> 
+    <select id="shellDropdown"></select>
+    <div class="section">
+      <div class="section-content"></div>
+    </div>
+  </div>
+  
+  <div id="tooltip" class="tooltip"></div>
+  <script type="module" src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>3D Model Viewer</title>
+  <link rel="stylesheet" href="styles.css">
+  <script type="module" src="script.js"></script>
+  <div class="crosshair"></div>
+</head>
+<body>
+
+
+<div id="ray-log-container" class="ray-log-container"></div>
+
+ <div class="container">
+    <div class="sidebar left-sidebar">
+
+      <div class="expandable-menu">
+        <h4 class="expandable-header">Mounting</h4>
+        <div class="expandable-content" id="mountDropdowns"></div>
+      </div>
+
+      <div class="expandable-menu">
+        <h4 class="expandable-header">Component</h4>
+        <div class="expandable-content" id="componentDropdowns"></div>
+      </div>
+
+      <div class="expandable-menu">
+        <h4 class="expandable-header">Module</h4>
+        <div class="expandable-content" id="moduleDropdowns"></div>
+      </div>
+    </div>
+    </div>
+
+
+    <div class="sidebar right-sidebar" >
+      <select id="hullDropdown"></select>
+      <select id="shellDropdown"></select>
+	  <h4>shuttle, raines, keystone need collider<h4>
+    </div>
+
+
+
+</body>
+</html>
