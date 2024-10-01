@@ -1,49 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Three.js Scene</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>3D Model Viewer</title>
+  <link rel="stylesheet" href="styles.css">
+  <script type="module" src="script.js"></script>
+  <div class="crosshair"></div>
 </head>
 <body>
-    <script type="module" src="script.js"></script>
-	<div class="crosshair"></div>
-	
-    <div class="right-sidebar">
-	 <select id="hullDropdown"></select>
-     <select id="shellDropdown"></select>
+
+
+<div id="ray-log-container" class="ray-log-container"></div>
+
+ <div class="container">
+    <div class="sidebar left-sidebar">
+
+      <div class="expandable-menu">
+        <h4 class="expandable-header">Mounting</h4>
+        <div class="expandable-content" id="mountDropdowns" id="dropdown-item"></div>
+      </div>
+
+      <div class="expandable-menu">
+        <h4 class="expandable-header">Component</h4>
+        <div class="expandable-content" id="componentDropdowns" id="dropdown-item"></div>
+      </div>
+
+      <div class="expandable-menu">
+        <h4 class="expandable-header">Module</h4>
+        <div class="expandable-content" id="moduleDropdowns" id="dropdown-item"></div>
+
+      </div>
+    </div>
     </div>
 
+	<button class="download-ship-btn" onclick="downloadShipFile()">Download Ship File</button>
+    <div class="sidebar right-sidebar" >
+      <select id="hullDropdown"></select>
+      <select id="shellDropdown"></select>
+	  <button id="reloadSceneButton" >Reload Scene</button>
+	  <h4>shuttle, raines, keystone need collider<h4>
 
-
-
-	 <div id="ray-log-container">
-
-	</div>
-
-
-
-
-
-    <div class="left-sidebar">
-
-    <div class="dropdown-container">
-        <div class="expandable-header">Mounting</div>
-        <div class="expandable-menu" id="mountingDropdowns">
-            <!-- Dynamic content for Mounting Dropdowns -->
-        </div>
-
-        <div class="expandable-header">Component</div>
-        <div class="expandable-menu" id="componentDropdowns">
-            <!-- Dynamic content for Component Dropdowns -->
-        </div>
-
-        <div class="expandable-header">Module</div>
-        <div class="expandable-menu" id="moduleDropdowns">
-            <!-- Dynamic content for Module Dropdowns -->
-        </div>
     </div>
+
 
 
 </body>

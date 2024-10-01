@@ -1,0 +1,136 @@
+name,group,x,y,z,tileable,point cost,mass,health,dt,if reinforsed,sub group,buff
+Auxiliary Steering,1,3,1,3,0,10,10,300,20,1,Command,None
+Basic CIC,1,4,1,6,0,10,15,200,25,0,Command,None
+Citadel CIC,1,6,1,8,0,75,70,400,50,1,Command,None
+Reinforced CIC,1,4,1,6,0,25,35,200,40,1,Command,None
+Supplementary Radio Amplifiers,2,2,2,2,0,20,4 ,40,10,0,Communications,Transmit Power: +25%
+CR10 Antenna,0,2,1,2,0,5,4 ,100,15,0,Communications,None
+CR70 Antenna,0,2,1,2,0,15,7 ,250,30,0,Communications,None
+Battle Dressing Station,1,3,1,3,0,20,10,125,10,0,Crew,Crew Vulnerability: -30%
+Berthing,1,1,1,1,1,1,0.5,50,15,0,Crew,None
+Damage Control Central,1,3,1,3,0,20,7 ,200,35,0,Damage Control,Repair Team Move Speed: +50% Repair Speed: +10%
+Damage Control Complex,1,6,3,6,0,80,20,600,40,1,Damage Control,Repair Team Move Speed: +30% Repair Speed: +10% Max Repair: +5 %
+Large DC Locker,1,3,1,6,0,45,3 ,200,15,0,Damage Control,None
+Large DC Storage,1,6,3,6,0,45,7 ,300,30,0,Damage Control,None
+Rapid DC Locker,1,3,1,3,0,10,1.5,100,15,0,Damage Control,None
+Reinforced DC Locker,1,3,1,6,0,45,1.5,250,35,1,Damage Control,None
+Small DC Locker,1,3,1,3,0,20,1.5,150,15,0,Damage Control,None
+Small Workshop,1,3,1,3,0,20,7 ,150,35,0,Damage Control,Repair Speed: +30%
+Launcher Deluge System,2,2,2,2,0,15,30,75,10,0,Damage Control,Catastrophic Event Prob. (Cell launcher): -50%
+Magazine Sprinklers,2,2,2,2,0,15,30,75,10,0,Damage Control,Catastrophic Event Prob. (Magazine): -50%
+Signature Scrambler,2,2,2,2,0,35,4 ,50,10,0,EWar,Identification Difficulty: +100% Sensitivity: -10%
+E15 'Masquerade' Deception Module,0,3,1,3,0,20,5 ,100,15,0,EWar,None
+E20 'Lighthouse' Illuminator,0,2,1,2,0,15,2 ,75,15,0,EWar,Radar Signature: +10%
+E55 'Spotlight' Illuminator,0,2,1,2,0,15,2 ,75,15,0,EWar,Radar Signature: +10%
+E57 'Floodlight' Illuminator,0,2,1,2,0,15,2 ,75,15,0,EWar,Radar Signature: +10%
+E70 'Interruption' Jammer,0,3,1,3,0,55,5 ,100,15,0,EWar,None
+E71 'Hangup' Jammer,0,2,1,2,0,45,2 ,75,15,0,EWar,None
+E90 'Blanket' Jammer,0,2,1,2,0,50,2 ,75,15,0,EWar,Radar Signature: +10%
+J15 'Bellbird' Jammer,0,3,1,3,0,50,2 ,150,15,0,EWar,Radar Signature: +10%
+J360 'Lyrebird' Jammer,0,3,1,3,0,75,10,100,15,0,EWar,None
+L50 'Blackjack' Laser Dazzler,0,2,1,2,0,40,2 ,75,15,0,EWar,None
+Plant Control Center,1,3,1,3,0,25,7 ,100,10,0,Engineering,Powerplant Efficiency: +20%
+Redundant Reactor Failsafes,2,2,2,2,0,25,5 ,75,10,0,Engineering,Catastrophic Event Prob. (Reactor): -33%
+Reinforced Thruster Nozzles,2,2,2,2,0,10,4 ,50,10,0,Engineering,Flank Damage Probability: -20%
+Small Reactor Booster,2,2,2,2,0,10,4 ,40,10,0,Engineering,"Powerplant Efficiency: +10%
+Radar Signature: +5%"
+Analysis Annex,1,3,1,3,0,20,10,100,10,0,Intelligence,"Intelligence Effort: +30%
+Intelligence Accuracy: -30%"
+Intelligence Center,1,6,1,8,0,90,25,200,15,0,Intelligence,None
+Jury-Rigged Reactor,1,6,3,6,0,20,10,300,30,0,Powerplant,Reload Time (Energy): +25%
+Boosted Reactor,2,5,5,5,0,10,40,300,40,0,Powerplant,None
+Civilian Reactor,2,5,5,5,0,10,40,300,40,0,Powerplant,None
+FR3300 Micro Reactor,2,3,3,3,0,10,25,200,30,0,Powerplant,None
+FR4800 Reactor,2,5,5,5,0,10,40,300,40,0,Powerplant,None
+Light Civilian Reactor,2,3,3,3,0,10,25,200,30,0,Powerplant,None
+BW1500 Drive,2,12,12,12,0,10,35,700,40,0,Propulsion,None
+BW1500-R Drive,2,12,12,12,0,20,35,1400,70,1,Propulsion,None
+BW2000 Drive,2,12,12,12,0,15,35,700,40,0,Propulsion,Top Speed: -10% Linear Thrust: -15% Angular Thrust: -15%
+BW800 Drive,2,5,3,5,0,10,35,250,40,0,Propulsion,None
+BW800-R Drive,2,5,3,5,0,20,35,400,50,1,Propulsion,None
+CHI-7700 Drive,2,12,12,12,0,20,35,700,40,0,Propulsion, Top Speed: -15% Linear Thrust: +30% Turn Rate: +40% Angular Thrust: +35%
+CHI-777 Yard Drive,2,5,3,5,0,20,35,250,40,0,Propulsion,Top Speed: -7.5% Linear Thrust: +15% Turn Rate: +45% Angular Thrust: +40%
+CHI-9100 Long Haul Drive,2,12,12,12,0,20,35,700,40,0,Propulsion,Top Speed: +20% Flank Damage Probability: +25% Angular Thrust: -10%
+FM200 Drive,2,5,3,5,0,10,35,250,40,0,Propulsion,None
+FM200R Drive,2,5,3,5,0,20,35,500,60,1,Propulsion,None
+FM230 'Whiplash' Drive,2,5,3,5,0,20,35,250,40,0,Propulsion,Top Speed: +20% Flank Damage Probability: -15% Turn Rate: -15% Angular Thrust: -20%
+FM240 'Dragonfly' Drive,2,5,3,5,0,20,35,250,40,0,Propulsion,Top Speed: -7.5% Turn Rate: +40% Angular Thrust: +30%
+FM280 'Raider' Drive,2,5,3,5,0,20,35,250,40,0,Propulsion,Flank Damage Probability: +50% Linear Thrust: +30% Radar Signature: +20%
+FM30X 'Prowler' Drive,2,5,3,5,0,25,35,200,25,0,Propulsion,Top Speed: -15% Radar Signature: -25% Angular Thrust: -10%
+FM500 Drive,2,10,8,10,0,15,80,1000,70,0,Propulsion,None
+FM500R Drive,2,10,8,10,0,30,80,1500,80,1,Propulsion,None
+FM530 'Whiplash' Drive,2,10,8,10,0,30,80,1000,70,0,Propulsion,Top Speed: +15% Flank Damage Probability: -15% Turn Rate: -20% Angular Thrust: -20%
+FM540 'Dragonfly' Drive,2,10,8,10,0,30,80,1000,70,0,Propulsion,Top Speed: -10% Turn Rate: +45% Angular Thrust: +40%
+FM580 'Raider' Drive,2,10,8,10,0,30,80,1000,70,0,Propulsion,Flank Damage Probability: +50% Linear Thrust: +30% Radar Signature: +25%
+Sundrive Racing Pro,2,5,3,5,0,20,35,200,30,0,Propulsion,Top Speed: +25% Flank Damage Probability: -20% Angular Thrust: -25%
+Adaptive Radar Receiver,2,2,2,2,0,30,4 ,40,10,0,Sensors,Sensitivity: +25% Noise Filtering: -0.7 dB Positional Error: +5% Velocity Error: +2.5%
+Bulwark Huntress,2,2,2,2,0,30,5 ,200,30,0,Sensors,None
+ES32 'Scryer' Missile ID System,2,2,2,2,0,10,5 ,150,15,0,Sensors,None
+Ithaca Bridgemaster,2,2,2,2,0,10,5 ,200,30,0,Sensors,None
+RM50 'Parallax' Radar,2,2,2,2,0,45,7.5,300,40,0,Sensors,None
+RS35 'Frontline' Radar,2,2,2,2,0,10,5 ,200,30,0,Sensors,None
+RS41 'Spyglass' Radar,2,2,2,2,0,25,5 ,200,30,0,Sensors,None
+Strobe Correlator,2,2,2,2,0,25,4 ,40,10,0,Sensors,Jamming LOB Accuracy: -30%
+Track Correlator,2,2,2,2,0,25,4 ,40,10,0,Sensors,Positional Error: -20% Velocity Error: -20%
+ES22 'Pinard' Electronic Support Module,0,3,1,3,0,30,3 ,50,15,0,Sensors,None
+R400 'Bloodhound' LRT Radar,0,2,5,2,0,40,0 ,200,15,0,Sensors,None
+R550 Early Warning Radar,0,3,1,3,0,65,10,150,15,0,Sensors,None
+RF101 'Bullseye' Radar,0,2,1,2,0,40,2 ,70,10,0,Sensors,None
+RF44 'Pinpoint' Radar,0,2,1,2,0,10,2 ,70,10,0,Sensors,None
+Bulk Magazine,1,1,1,1,1,1,1 ,100,25,0,Storage,None
+Citadel Magazine,1,1,3,1,1,8,0 ,300,50,1,Storage,None
+Reinforced Magazine,1,1,1,1,1,2,2 ,150,40,1,Storage,None
+Container Datalink Array,1,6,3,6,0,200,40,300,30,0,Weapon Support,Missile Programming Channels: +2 Missile Programming Speed: +30%
+Gun Plotting Center,1,3,1,3,0,30,7 ,100,10,0,Weapon Support,Spread: -30%
+Strike Planning Center,1,6,1,8,0,70,10,100,10,0,Weapon Support,Missile Programming Speed: +60%
+Actively Cooled Amplifiers,2,2,2,2,0,25,4 ,40,10,0,Weapon Support,Burst Duration (Emitters): +25% Cooldown Time (Emitters): -20% Overheat Damage Chance (Emitters): -10%
+Ammunition Elevators,2,2,2,2,0,20,30,100,15,0,Weapon Support,Reload Time: -15% Launcher Reload Time: -15%
+Energy Regulator,2,3,3,3,0,30,30,100,15,0,Weapon Support,Reload Time (Energy): -20% Cooldown Time (Energy): -20% Cooldown Time (Beam): -20%
+Focused Particle Accelerator,2,3,3,3,0,25,45,150,40,0,Weapon Support,Damage Multiplier (Beam): +25% Burst Duration (Beam): -5%
+Missile Parallel Interface,2,2,2,2,0,40,5 ,100,15,0,Weapon Support,Missile Programming Speed: +35%
+Missile Programming Bus,2,2,2,2,0,30,5 ,80,15,0,Weapon Support,Missile Programming Channels: +1
+Missile Programming Bus Array,2,3,3,3,0,50,5 ,100,15,0,Weapon Support,Missile Programming Channels: +2
+Mount Gyros,2,2,2,2,0,20,4 ,40,10,0,Weapon Support,Spread: -7.5% Traverse Rate: +25% Elevation Rate: +20% Casemate Traverse Rate: +15% Casemate Elevation Rate: +15%
+Rapid-Cycle Cradle,2,3,3,3,0,20,30,100,15,0,Weapon Support,Recycle Time: -25%
+Small Energy Regulator,2,2,2,2,0,20,20,75,10,0,Weapon Support,Reload Time (Energy): -12% Cooldown Time (Energy): -12% Cooldown Time (Beam): -12%
+C81 Plasma Cannon,0,4,6,4,0,30,80,500,40,0,Weapons - Energy,None
+Mk610 Beam Turret,0,8,5,8,0,80,50,400,30,0,Weapons - Energy,None
+T81 Plasma Cannon,0,6,3,6,0,45,80,300,15,0,Weapons - Energy,None
+CLS-3 Launcher,0,3,4,3,0,20,20,250,15,0,Weapons - Missile,None
+Container Bank Launcher,0,20,5,10,0,5,50,500,15,0,Weapons - Missile,None
+Container Stack Launcher,0,6,1,6,0,5,3 ,200,15,0,Weapons - Missile,None
+ML-9 Mine Launcher,0,3,2,3,0,10,7.5,200,15,0,Weapons - Missile,None
+MLS-2 Launcher,0,2,2,5,0,20,7.5,200,15,0,Weapons - Missile,None
+MLS-3 Launcher,0,2,2,5,0,20,15,200,15,0,Weapons - Missile,None
+RL18 Launcher,0,3,1,3,0,30,8 ,100,15,0,Weapons - Missile,None
+RL36 Launcher,0,6,3,6,0,30,13,175,15,0,Weapons - Missile,None
+TLS-3 Launcher,0,3,1,5,0,20,25,350,15,0,Weapons - Missile,None
+VLS-1-23 Launcher,0,2,2,2,0,5,3 ,75,15,0,Weapons - Missile,None
+VLS-1-46 Launcher,0,3,2,3,0,5,10,125,15,0,Weapons - Missile,None
+VLS-2 Launcher,0,3,4,3,0,10,5 ,200,15,0,Weapons - Missile,None
+VLS-3 Launcher,0,3,4,3,0,20,20,250,15,0,Weapons - Missile,None
+Mk20 'Defender' PDT,0,2,1,2,0,25,3 ,100,15,0,Weapons - Point Defense,None
+Mk25 'Rebound' PDT,0,2,1,2,0,15,3 ,100,15,0,Weapons - Point Defense,None
+Mk29 'Stonewall' PDT,0,3,1,3,0,40,7 ,150,15,0,Weapons - Point Defense,None
+Mk90 'Aurora' PDT,0,2,1,2,0,55,3 ,100,15,0,Weapons - Point Defense,None
+Mk95 'Sarissa' PDT,0,3,1,3,0,65,7 ,150,15,0,Weapons - Point Defense,None
+P11 'Pavise' PDT,0,2,1,2,0,20,4 ,100,15,0,Weapons - Point Defense,None
+P20 'Bastion' PDT,0,2,1,2,0,15,7 ,150,15,0,Weapons - Point Defense,None
+P60 'Grazer' PDT,0,2,1,2,0,35,3 ,100,15,0,Weapons - Point Defense,None
+C30 Cannon,0,2,5,2,0,20,15,350,20,0,Weapons - Projectile,None
+C53 Cannon,0,2,4,2,0,10,3 ,300,20,0,Weapons - Projectile,None
+C56 Cannon,0,4,6,4,0,20,3 ,350,40,0,Weapons - Projectile,None
+C65 Cannon,0,6,12,6,0,30,35,500,40,0,Weapons - Projectile,None
+C90 Cannon,0,x,2,6,0,40,50,500,40,0,Weapons - Projectile,None
+Mk61 Cannon,0,3,1,3,0,10,3 ,150,15,0,Weapons - Projectile,None
+Mk62 Cannon,0,3,1,3,0,20,6 ,150,15,0,Weapons - Projectile,None
+Mk64 Cannon,0,3,1,5,0,30,3 ,225,20,0,Weapons - Projectile,None
+Mk65 Cannon,0,6,3,6,0,40,12,450,40,0,Weapons - Projectile,None
+Mk66 Cannon,0,6,3,6,0,45,25,550,40,0,Weapons - Projectile,None
+Mk68 Cannon,0,8,5,8,0,75,40,650,40,0,Weapons - Projectile,None
+Mk81 Railgun,0,6,3,6,0,50,20,300,30,0,Weapons - Projectile,None
+T20 Cannon,0,3,1,3,0,15,3 ,150,15,0,Weapons - Projectile,None
+T30 Cannon,0,6,3,6,0,20,50,200,15,0,Weapons - Projectile,None
+Mk550 Railgun,0,4,12,4,0,75,10,450,40,0,Weapons - Spinal,None
+Mk600 Beam Cannon,0,4,12,4,0,75,10,450,40,0,Weapons - Spinal,None
+TE45 Mass Driver,0,4,10,4,0,100,10,150,30,0,Weapons - Spinal,None

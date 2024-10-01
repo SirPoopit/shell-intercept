@@ -11,6 +11,12 @@ body {
     background-color: black;
     color: white;
 	font-family: 'bombardier', sans-serif;
+-webkit-user-drag: none; 
+  user-select: none; 
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+	
 }
 
 
@@ -41,6 +47,24 @@ body {
     overflow-y: auto;
 	border: 1px solid #525452
 }
+
+.download-ship-btn {
+
+	padding: 10px;
+}
+
+/* CSS to style the button */
+#reloadSceneButton {
+    margin-top: 10px;
+    padding: 10px;
+    background-color: #444;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+
+
 
 
 /* Dropdown styling */
@@ -129,21 +153,74 @@ select {
 
 
 .expandable-menu {
-  margin-bottom: 10px;
+  margin-bottom: 0px;
 }
 
 .expandable-header {
+  margin: 0px;
   background-color: #444;
   padding: 10px;
   cursor: pointer;
+  font-size: 20px;
 }
 
 .expandable-content {
   display: none;
-  padding: 10px;
+  padding: 0px;
   background-color: #333;
 }
 
 .expandable-menu.active .expandable-content {
   display: block;
+}
+
+
+.dropdown-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;
+    padding: 0px;
+    border: 1px solid #ccc;
+}
+
+
+
+.left-box, .right-box {
+    padding: 0px;
+    text-align: center;
+}
+
+/* Container for the dropdown items */
+.dropdown-item-container {
+  display: flex;
+  padding: 1px;
+}
+
+/* Left box for the labels like MT1, CMP1, MOD1 */
+.left-box {
+  border: 1px solid #707070; /* Orange border */
+  width: 30%;
+  color: white;
+  font-size: 20px;
+
+}
+
+/* Right box for the "< EMPTY >" text */
+.right-box {
+  border: 1px solid #707070;
+  text-align: center;
+  width: 70%;
+  color: #707070;
+  font-size: 14px;
+}
+
+/* Expandable section styling */
+#mountDropdowns, #componentDropdowns, #moduleDropdowns {
+  padding: 0px;
+}
+
+/* Hover effect to highlight the correlated rendered box */
+.dropdown-item-container:hover {
+  background-color: #333333;
+  cursor: pointer;
 }

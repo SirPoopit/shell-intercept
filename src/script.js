@@ -30,14 +30,17 @@ let rayLines = [];
 let rayLogs = [];
 
 
-
 const raycaster = new THREE.Raycaster();
 const mouse = new THREE.Vector2();
 let hoveredBox = null;
 
+
 animate();
 loadShellsIntoDropdown('shells.txt', 'shellDropdown');
 document.getElementById('shellDropdown').addEventListener('change', loadShellmodifers);
+document.getElementById('hullDropdown').addEventListener('change', loadModules);
+document.getElementById('hullDropdown').addEventListener('change', loadhull);
+document.getElementById('hullDropdown').addEventListener('change', clearRaysAndLogs);
 const rayLogContainer = document.getElementById('ray-log')
 let armorValue, internalDensity, armorPenetration, armorDamageRadius;
 let transparency = .4;
@@ -45,6 +48,8 @@ let transparencybool = false;
 let intersectionPoint, intersectionNormal;
 
 
+
+window.addEventListener('mousemove', onMouseMove);
 
 
 // Scroll wheel to translate forward/back
@@ -73,7 +78,9 @@ document.querySelectorAll('.expandable-header').forEach(header => {
     });
 });
 
-
+document.getElementById('reloadSceneButton').addEventListener('click', function() {
+    reloadScene();  // Calls reloadScene from your existing script.js
+});
 
 
 // Event listener for the space bar to draw rays
@@ -185,6 +192,8 @@ function loadhull() {
     fetch(`hulls/${hull}.csv`)
         .then(response => response.text())
         .then(data => {
+			const hullData = parseCSV(data);
+			populateMenus(hullData);
             const lines = data.split('\n').filter(Boolean);
             const firstLine = lines[0].split(',');
 			const armorValue = firstLine[2];
@@ -277,6 +286,29 @@ function loadModules() {
                 boxes.push(cube);  // Add the cube to the boxes array
             }
         });
+}
+
+
+function onMouseMove(event) {
+    mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+    mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+
+    raycaster.setFromCamera(mouse, camera);
+
+    const intersects = raycaster.intersectObjects(boxes);
+
+    if (hoveredBox) {
+        hoveredBox.material.color.set(hoveredBox.userData.originalColor);  // Reset color
+        hoveredBox = null;
+    }
+
+    if (intersects.length > 0) {
+        hoveredBox = intersects[0].object;
+        if (!hoveredBox.userData.originalColor) {
+            hoveredBox.userData.originalColor = hoveredBox.material.color.getHex();
+        }
+        hoveredBox.material.color.set(0xffff00);  // Highlight color
+    }
 }
 
 
@@ -548,6 +580,87 @@ function createDecalAtFirstIntersection(intersectionPoint, normal) {
     const decalMesh = new THREE.Mesh(decalGeometry, decalMaterial);
     scene.add(decalMesh); // Add the decal to your scene
 }
+
+function parseCSV(csvText) {
+  const rows = csvText.trim().split('\n');
+  const hullData = [];
+
+  // Skip the first line (header) and process the remaining lines
+  for (let i = 1; i < rows.length; i++) {
+    const cols = rows[i].split(',').map(Number); // Convert values to numbers
+    hullData.push(cols); // Each row is an array representing [type, posX, posY, posZ, rotX, rotY, rotZ, sizeX, sizeY, sizeZ]
+  }
+  
+  return hullData; // Returns the parsed CSV data as an array of arrays
+}
+
+
+
+
+
+
+
+
+
+function populateMenus(hullData) {
+  const mountDropdowns = document.getElementById('mountDropdowns');
+  const componentDropdowns = document.getElementById('componentDropdowns');
+  const moduleDropdowns = document.getElementById('moduleDropdowns');
+
+  // Ensure these elements exist before proceeding
+  if (!mountDropdowns || !componentDropdowns || !moduleDropdowns) {
+    console.error('Dropdown elements not found.');
+    return;
+  }
+
+  // Clear existing dropdown content to prevent duplication
+  mountDropdowns.innerHTML = '';
+  componentDropdowns.innerHTML = '';
+  moduleDropdowns.innerHTML = '';
+
+  // Counters for MNT, CMP, and MOD
+  let mountCounter = 1;
+  let componentCounter = 1;
+  let moduleCounter = 1;
+
+  // Function to create each row (left and right boxes)
+  function createDropdownItem(counter, type, sizeX, sizeY, sizeZ) {
+    const container = document.createElement('div');
+    container.classList.add('dropdown-item-container');
+
+    const leftBox = document.createElement('div');
+    leftBox.classList.add('left-box');
+    leftBox.textContent = `${type}${counter} ${sizeX}x${sizeY}x${sizeZ}`;
+
+    const rightBox = document.createElement('div');
+    rightBox.classList.add('right-box');
+    rightBox.textContent = '< EMPTY >';
+
+    container.appendChild(leftBox);
+    container.appendChild(rightBox);
+
+    return container;
+  }
+
+  // Loop through hull data and assign rows to appropriate dropdowns
+  hullData.forEach((row) => {
+    const [type, posX, posY, posZ, rotX, rotY, rotZ, sizeX, sizeY, sizeZ] = row;
+
+    // Populate the dropdown based on type
+    if (type === 0) {
+      const item = createDropdownItem(mountCounter++, 'MT', sizeX, sizeY, sizeZ);
+      mountDropdowns.appendChild(item);
+    } else if (type === 1) {
+      const item = createDropdownItem(componentCounter++, 'CMP', sizeX, sizeY, sizeZ);
+      componentDropdowns.appendChild(item);
+    } else if (type === 2) {
+      const item = createDropdownItem(moduleCounter++, 'MOD', sizeX, sizeY, sizeZ);
+      moduleDropdowns.appendChild(item);
+    }
+  });
+}
+
+
 
 
 
