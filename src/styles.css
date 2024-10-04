@@ -21,11 +21,11 @@ body {
 
 
 
-
 .left-sidebar {
     left: 0;
 	height: 88%;
-	/* image: url('pngs/Group_Header_Orange.png'); */
+	/* image: url('pngs/
+	Group_Header_Orange.png'); */
 	position: absolute;
     bottom: 0;
 	width: 16%;
@@ -63,7 +63,24 @@ body {
     cursor: pointer;
 }
 
+/* CSS for the file button */
+#top-right {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
 
+#uploadShipFile {
+    padding: 10px;
+    background-color: #444;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+#uploadShipFile:hover {
+    background-color: #666;
+}
 
 
 
@@ -223,4 +240,25 @@ select {
 .dropdown-item-container:hover {
   background-color: #333333;
   cursor: pointer;
+}
+
+
+
+.toggle-button {
+    padding: 10px 20px;
+    font-size: 16px;
+    color: #fff;
+    background-color: #007bff; /* Blue color */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.toggle-button.on {
+    background-color: #28a745; /* Green color */
+}
+
+.toggle-button.off {
+    background-color: #dc3545; /* Red color */
 }

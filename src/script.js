@@ -4,7 +4,7 @@ import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { DecalGeometry } from 'three/addons/geometries/DecalGeometry.js';
 
 const scene = new THREE.Scene();
-const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 100);  // FOV set to 60
+const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 500);  // FOV set to 60
 camera.position.set(15, 0, 0);
 const renderer = new THREE.WebGLRenderer({ antialias: true });
 renderer.setSize(window.innerWidth, window.innerHeight);
@@ -28,7 +28,7 @@ let rays = []; // Array to store rays and their visibility state
 let rayIndex = 0; // Counter for rays
 let rayLines = [];
 let rayLogs = [];
-
+let data = [];
 
 const raycaster = new THREE.Raycaster();
 const mouse = new THREE.Vector2();
@@ -46,8 +46,10 @@ let armorValue, internalDensity, armorPenetration, armorDamageRadius;
 let transparency = .4;
 let transparencybool = false;
 let intersectionPoint, intersectionNormal;
+let hulldata;
 
-
+let cameraInsideModel = true;  // Track if the camera is inside the model
+let debounceTimer = null;  // To prevent rapid reloading
 
 window.addEventListener('mousemove', onMouseMove);
 
@@ -82,6 +84,42 @@ document.getElementById('reloadSceneButton').addEventListener('click', function(
     reloadScene();  // Calls reloadScene from your existing script.js
 });
 
+document.getElementById('populate').addEventListener('click', function() {
+    populateMenus(hullData);  // Calls reloadScene from your existing script.js
+});
+
+
+document.getElementById('HEKP').addEventListener('click', function() {
+    createDamageGeometry(175);  // Calls reloadScene from your existing script.js
+});
+
+
+
+document.getElementById('clearScene').addEventListener('click', function() {
+    clearScene();
+});
+
+
+
+// JavaScript to handle the file input and download the selected .ship file
+document.getElementById('uploadShipFile').addEventListener('click', function() {
+    document.getElementById('fileInput').click();
+});
+
+document.getElementById('fileInput').addEventListener('change', function(event) {
+    const file = event.target.files[0];
+    if (file && file.name.endsWith('.ship')) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            const fileContent = e.target.result;
+            console.log('Selected .ship file content:', fileContent);
+            parseXML(fileContent)
+        };
+        reader.readAsText(file);
+    } else {
+        alert('Please select a valid .ship file.');
+    }
+});
 
 // Event listener for the space bar to draw rays
 window.addEventListener('keydown', (event) => {
@@ -90,8 +128,6 @@ window.addEventListener('keydown', (event) => {
         castRayAtModel(armorValue, internalDensity, armorPenetration);  // Cast the ray at the model when space is pressed
     }
 });
-
-
 
 // Load hulls into dropdown and set the default behavior
 fetch('hulls.txt').then(response => response.text()).then(data => {
@@ -112,8 +148,6 @@ fetch('hulls.txt').then(response => response.text()).then(data => {
 	clearRaysAndLogs()
 });
 
-let cameraInsideModel = true;  // Track if the camera is inside the model
-let debounceTimer = null;  // To prevent rapid reloading
 
 function checkIntersectionWithRays() {
     if (!model) return;  // Return if the model isn't loaded
@@ -166,6 +200,15 @@ function reloadScene() {
 }
 
 
+function clearScene() {
+	console.log('clearScene');
+	clearRaysAndLogs();
+    clearModules();  
+    scene.remove(model); 
+    scene.remove(colliderModel); 
+}
+
+
 // Load the shells into dropdown menu
 function loadShellsIntoDropdown(filePath, dropdownId) {
     fetch(filePath).then(response => response.text()).then(data => {
@@ -191,16 +234,14 @@ function loadhull() {
     
     fetch(`hulls/${hull}.csv`)
         .then(response => response.text())
-        .then(data => {
-			const hullData = parseCSV(data);
-			populateMenus(hullData);
-            const lines = data.split('\n').filter(Boolean);
+        .then(hullData => {
+            const lines = hullData.split('\n').filter(Boolean);
+            hullData = lines.map(line => line.split(',')); // Store CSV data for key matching
             const firstLine = lines[0].split(',');
-			const armorValue = firstLine[2];
-			const internaldensity = firstLine[3];
-            // Load hull.glb from first value
-            const glbFile = firstLine[0];
-            loader.load(`hulls/${glbFile}`, function (gltf) {
+			const armorValue = firstLine[0];
+			const internaldensity = firstLine[1];
+            
+            loader.load(`hulls/${hull}.glb`, function (gltf) {
                 model = gltf.scene;
                 model.rotation.y = Math.PI;  // Flip model 180 degrees
                 
@@ -220,22 +261,22 @@ function loadhull() {
             });
 
             // Load collider.glb from second value and set full transparency
-            const colliderGlb = firstLine[1];  // Second value for collider
-            loader.load(`hulls/${colliderGlb}`, function (gltf) {
+            loader.load(`hulls/${hull} Collider.glb`, function (gltf) {
                 colliderModel = gltf.scene;
-//                colliderModel.rotation.y = Math.PI;
-
                 colliderModel.traverse((child) => {
                     if (child.isMesh) {
                         child.visible = false;  // Make collider invisible
-
                     }
                 });
 
                 scene.add(colliderModel);
             });
+            
+            loadModules(); // Trigger module loading after hull is loaded
+//			populateMenus(hullData)
         });
 }
+
 
 
 function loadModules() { 
@@ -312,58 +353,11 @@ function onMouseMove(event) {
 }
 
 
-
 // Clear all existing cubes
 function clearModules() {
     console.log("clearModules");
     boxes.forEach(box => scene.remove(box));
     boxes = [];
-}
-
-
-function populateDropdownsFromCSV(data) {
-    console.log("populateDropdownsFromCSV");
-    const lines = data.split('\n').filter(Boolean);
-  
-    // Reset dropdown containers
-    const mountingContent = document.getElementById('mountingDropdowns');
-    const componentContent = document.getElementById('componentDropdowns');
-    const moduleContent = document.getElementById('moduleDropdowns');
-  
-    mountingContent.innerHTML = '';
-    componentContent.innerHTML = '';
-    moduleContent.innerHTML = '';
-      
-    let mountCount = 1; // Initialized counter
-    let moduleCount = 1; // Initialized counter
-    let componentCount = 1; // Initialized counter
-
-    // Process each line after the first (which contains metadata)
-    for (let i = 1; i < lines.length; i++) {
-        const rowData = lines[i].split(',');
-
-        const category = parseInt(rowData[0]);
-        const xPos = rowData[1]; // Example of using the position data
-        const yPos = rowData[2];
-        const zPos = rowData[3];
-
-        // Create a dropdown item depending on the category
-        let dropdownItem = document.createElement('div');
-        
-        if (category === 0) {
-            dropdownItem.textContent = `mod ${mountCount}`;
-            mountingContent.appendChild(dropdownItem); // Fixed dropdown reference
-            mountCount++; // Increment mod counter
-        } else if (category === 1) {
-            dropdownItem.textContent = `com ${moduleCount}`;
-            componentContent.appendChild(dropdownItem); // Fixed dropdown reference
-            moduleCount++; // Increment compartment counter
-        } else if (category === 2) {
-            dropdownItem.textContent = `mod ${componentCount}`;
-            moduleContent.appendChild(dropdownItem); // Fixed dropdown reference
-            componentCount++; // Increment mod counter
-        }
-    }
 }
 
 
@@ -419,7 +413,6 @@ function castRayAtModel() {
     // Create a ray from the camera position in the direction it is facing
     const raycaster = new THREE.Raycaster(cameraPosition, cameraDirection);
     const intersects = raycaster.intersectObject(colliderModel);
-	
 
     // Variables to store intersection points
     let firstIntersection = null;
@@ -445,8 +438,14 @@ function castRayAtModel() {
             // Calculate the direction from firstIntersection to secondIntersection
             const direction = new THREE.Vector3().subVectors(secondIntersection, firstIntersection).normalize();
 
+            // Calculate the distance between the two intersection points (penetration depth)
+            const penetrationDepth = 18.5; //firstIntersection.distanceTo(secondIntersection);
+
+            // Call createDamageGeometry to generate the damage geometry at the first intersection point
+            createDamageGeometryAtPoint(firstIntersection, direction, penetrationDepth);
+
             // Calculate the endpoint of the blue line using armorPenetration
-            const blueLineEnd = firstIntersection.clone().add(direction.multiplyScalar(armorPenetration/4));
+            const blueLineEnd = firstIntersection.clone().add(direction.multiplyScalar(armorPenetration / 4));
             const blueLine = drawLine(firstIntersection, blueLineEnd, 0x0000ff);
             lines.push(blueLine);
         }
@@ -460,6 +459,63 @@ function castRayAtModel() {
     // Log all the lines together
     logShell(lines);
 }
+
+// Helper function to create damage geometry at the first intersection point
+function createDamageGeometryAtPoint(firstIntersection, direction, penetrationDepth) {
+    // Adjust the penetration depth by subtracting armor value
+    const adjustedPenetrationDepth = penetrationDepth - 0;
+
+    // Part 1: Create a 10m wide cylinder that extends to adjustedPenetrationDepth
+    const cylinderRadius = .5; // Radius is half of 10 meters
+    const cylinderHeight = adjustedPenetrationDepth;
+    const cylinderGeometry = new THREE.CylinderGeometry(cylinderRadius, cylinderRadius, cylinderHeight, 32);
+    const cylinderMaterial = new THREE.MeshBasicMaterial({ color: 0xff0000, wireframe: true});  // Solid red material
+    const cylinder = new THREE.Mesh(cylinderGeometry, cylinderMaterial);
+
+    // Set the cylinder's position: The midpoint of the cylinder should be halfway along its height.
+    const halfHeight = cylinderHeight / 2;
+    const startPoint = firstIntersection.clone();  // Start at the first intersection
+    const midpoint = startPoint.clone().add(direction.clone().multiplyScalar(halfHeight));  // Move halfway along the direction of the ray
+
+    // Set the cylinder's position at the midpoint
+    cylinder.position.copy(midpoint);
+
+    // Align the cylinder's axis with the ray direction
+    cylinder.quaternion.setFromUnitVectors(new THREE.Vector3(0, 1, 0), direction.clone().normalize());
+
+    // Add the cylinder to the scene
+    scene.add(cylinder);
+
+    // Part 2: Create spheres every 6.6m, scaling radii
+    const sphereCount = Math.floor(adjustedPenetrationDepth / .66);
+    let sphereRadius;
+    
+    for (let i = 0; i < sphereCount; i++) {
+        let distance = i * .66;
+        if (i <= 17) {
+            sphereRadius = THREE.MathUtils.lerp(.75, 2.5, i / 17); // Scaling up to 25 meters by the 18th sphere
+			console.log(sphereRadius);
+        } else {
+            sphereRadius = THREE.MathUtils.lerp(2.5, .75, (i - 18) / 8); // Scaling back down to 7.5 meters by the 26th sphere
+			console.log(sphereRadius);
+        }
+
+        // Create the sphere at the given distance
+        const sphereGeometry = new THREE.SphereGeometry(sphereRadius, 32, 32);
+        const sphereMaterial = new THREE.MeshBasicMaterial({ color: 0x00ff00, wireframe: true });  // Solid green material
+        const sphere = new THREE.Mesh(sphereGeometry, sphereMaterial);
+
+        // Position sphere along the direction
+        const spherePosition = startPoint.clone().add(direction.clone().multiplyScalar(distance));
+        sphere.position.copy(spherePosition);
+
+        // Add the sphere to the scene
+        scene.add(sphere);
+    }
+}
+
+
+
 
 
 // Function to clear all rays and log boxes from the scene and UI
@@ -581,84 +637,85 @@ function createDecalAtFirstIntersection(intersectionPoint, normal) {
     scene.add(decalMesh); // Add the decal to your scene
 }
 
-function parseCSV(csvText) {
-  const rows = csvText.trim().split('\n');
-  const hullData = [];
 
-  // Skip the first line (header) and process the remaining lines
-  for (let i = 1; i < rows.length; i++) {
-    const cols = rows[i].split(',').map(Number); // Convert values to numbers
-    hullData.push(cols); // Each row is an array representing [type, posX, posY, posZ, rotX, rotY, rotZ, sizeX, sizeY, sizeZ]
-  }
-  
-  return hullData; // Returns the parsed CSV data as an array of arrays
+
+
+
+
+
+
+
+
+
+
+
+function parseXML(fileContent) {
+    const parser = new DOMParser();
+    const xmlDoc = parser.parseFromString(xml, "text/xml");
+
+    // Extract the hull type (e.g., FF_Moxella from Falcata Republic/FF_Moxella)
+    const hullType = xmlDoc.querySelector("HullType").textContent.split("/").pop();
+    setHullDropdown(hullType); // Implement this to set the hull dropdown
+
+    // Extract HullSockets and their components
+    const hullSockets = xmlDoc.querySelectorAll("HullSocket");
+    hullSockets.forEach(socket => {
+        const key = socket.querySelector("Key").textContent;
+        const componentName = socket.querySelector("ComponentName").textContent;
+        updateComponentInUI(key, componentName); // Implement this
+    });
 }
 
-
-
-
-
-
-
-
-
-function populateMenus(hullData) {
-  const mountDropdowns = document.getElementById('mountDropdowns');
-  const componentDropdowns = document.getElementById('componentDropdowns');
-  const moduleDropdowns = document.getElementById('moduleDropdowns');
-
-  // Ensure these elements exist before proceeding
-  if (!mountDropdowns || !componentDropdowns || !moduleDropdowns) {
-    console.error('Dropdown elements not found.');
-    return;
-  }
-
-  // Clear existing dropdown content to prevent duplication
-  mountDropdowns.innerHTML = '';
-  componentDropdowns.innerHTML = '';
-  moduleDropdowns.innerHTML = '';
-
-  // Counters for MNT, CMP, and MOD
-  let mountCounter = 1;
-  let componentCounter = 1;
-  let moduleCounter = 1;
-
-  // Function to create each row (left and right boxes)
-  function createDropdownItem(counter, type, sizeX, sizeY, sizeZ) {
-    const container = document.createElement('div');
-    container.classList.add('dropdown-item-container');
-
-    const leftBox = document.createElement('div');
-    leftBox.classList.add('left-box');
-    leftBox.textContent = `${type}${counter} ${sizeX}x${sizeY}x${sizeZ}`;
-
-    const rightBox = document.createElement('div');
-    rightBox.classList.add('right-box');
-    rightBox.textContent = '< EMPTY >';
-
-    container.appendChild(leftBox);
-    container.appendChild(rightBox);
-
-    return container;
-  }
-
-  // Loop through hull data and assign rows to appropriate dropdowns
-  hullData.forEach((row) => {
-    const [type, posX, posY, posZ, rotX, rotY, rotZ, sizeX, sizeY, sizeZ] = row;
-
-    // Populate the dropdown based on type
-    if (type === 0) {
-      const item = createDropdownItem(mountCounter++, 'MT', sizeX, sizeY, sizeZ);
-      mountDropdowns.appendChild(item);
-    } else if (type === 1) {
-      const item = createDropdownItem(componentCounter++, 'CMP', sizeX, sizeY, sizeZ);
-      componentDropdowns.appendChild(item);
-    } else if (type === 2) {
-      const item = createDropdownItem(moduleCounter++, 'MOD', sizeX, sizeY, sizeZ);
-      moduleDropdowns.appendChild(item);
+function setHullDropdown(hullType) {
+    const dropdown = document.getElementById("hullDropdown");
+    const options = dropdown.options;
+    for (let i = 0; i < options.length; i++) {
+        if (options[i].text.includes(hullType)) {
+            dropdown.selectedIndex = i;
+            // Trigger the necessary reload or update after selection
+            reloadScene();
+            break;
+        }
     }
-  });
 }
+
+function findMatchingRowByKey(key) {
+    // Assume hullData is the already loaded array from `hull.csv`
+    for (let i = 0; i < hullData.length; i++) {
+        if (hullData[i][10] === key) { // 11th column (index 10)
+            return i;
+        }
+    }
+    return -1; // Not found
+}
+
+function updateComponentInUI(key, componentName) {
+    const rowIndex = findMatchingRowByKey(key);
+    if (rowIndex !== -1) {
+        const componentRow = document.querySelector(`#componentRow${rowIndex}`);
+        if (componentRow) {
+            const rightBox = componentRow.querySelector(".right-box");
+            rightBox.textContent = componentName;
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
