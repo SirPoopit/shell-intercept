@@ -2,6 +2,11 @@ import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { DecalGeometry } from 'three/addons/geometries/DecalGeometry.js';
+import { penHeatMap } from './components/penHeatMap.js'
+import  { createLine, createCone, createSphere } from './components/generateGeometry.js'
+import  { getOutcome } from './components/getOutcome.js'
+import  { penVisualiser } from './components/penVisualiser.js'
+
 
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 500);  // FOV set to 60
@@ -25,7 +30,6 @@ const loader = new GLTFLoader();
 let model, colliderModel;
 let boxes = [];  // Array to store created cubes
 let rays = []; // Array to store rays and their visibility state
-let rayIndex = 0; // Counter for rays
 let rayLines = [];
 let rayLogs = [];
 let data = [];
@@ -41,12 +45,27 @@ document.getElementById('shellDropdown').addEventListener('change', loadShellmod
 document.getElementById('hullDropdown').addEventListener('change', loadModules);
 document.getElementById('hullDropdown').addEventListener('change', loadhull);
 document.getElementById('hullDropdown').addEventListener('change', clearRaysAndLogs);
-const rayLogContainer = document.getElementById('ray-log')
-let armorValue, internalDensity, armorPenetration, armorDamageRadius;
-let transparency = .4;
-let transparencybool = false;
+const rayLogContainer = document.getElementById('ray-log-container');
+const button = document.getElementById("toggleHeatMap");
+let castType;
+let armorValue;
+let internalDensity;
+let armorPenetration;
+let armorDamageRadius;
+let explosionRadius;
+let intervalId = null;
+let isPenVisualiserToggledOn = false;
+let isHeatMapToggledOn = false;
+let rayIndex = 0;
+let munitionsToggle = true;
+const lines = [];
+let colliderVisibility = false;
+let modelVisibility = true;
+let modelTransparency = .4;
+let cubeTransparencyBool = false;
 let intersectionPoint, intersectionNormal;
 let hulldata;
+let localArmorStrip;
 
 let cameraInsideModel = true;  // Track if the camera is inside the model
 let debounceTimer = null;  // To prevent rapid reloading
@@ -80,26 +99,60 @@ document.querySelectorAll('.expandable-header').forEach(header => {
     });
 });
 
-document.getElementById('reloadSceneButton').addEventListener('click', function() {
-    reloadScene();  // Calls reloadScene from your existing script.js
+document.getElementById('toggleHeatMap').addEventListener('click', function() {
+	 if (isHeatMapToggledOn) {
+		 
+		modelTransparency = .4;
+		colliderVisibility = false;
+        clearInterval(intervalId);
+        intervalId = null;
+        isHeatMapToggledOn = false;
+		loadhull()
+    } else {
+		modelTransparency = .1;
+		colliderVisibility = true;
+        intervalId = setInterval(penHeatMapUpdater, 100);
+        isHeatMapToggledOn = true;
+		loadhull()
+    }
 });
 
-document.getElementById('populate').addEventListener('click', function() {
-    populateMenus(hullData);  // Calls reloadScene from your existing script.js
+document.getElementById('togglePenVisualiser').addEventListener('click', function() {
+	 if (isPenVisualiserToggledOn) {
+		 
+		modelTransparency = .4;
+		colliderVisibility = false;
+        clearInterval(intervalId);
+        intervalId = null;
+        isPenVisualiserToggledOn = false;
+		loadhull()
+    } else {
+		modelTransparency = .1;
+		colliderVisibility = true;
+        intervalId = setInterval(penVisualiserUpdater, 100);
+        isPenVisualiserToggledOn = true;
+		loadhull()
+    }
 });
 
+document.getElementById('munitionsToggle').addEventListener('click', function() {
+	 if (munitionsToggle) {
+		 
+        munitionsToggle = false;
+    } else {
+	
+        munitionsToggle = true;
 
-document.getElementById('HEKP').addEventListener('click', function() {
-    createDamageGeometry(175);  // Calls reloadScene from your existing script.js
+    }
 });
 
+function penHeatMapUpdater(){
+	penHeatMap(camera, colliderModel);
+}
 
-
-document.getElementById('clearScene').addEventListener('click', function() {
-    clearScene();
-});
-
-
+function penVisualiserUpdater(){
+	penVisualiser(camera, colliderModel, armorPenetration, armorValue, internalDensity);
+}
 
 // JavaScript to handle the file input and download the selected .ship file
 document.getElementById('uploadShipFile').addEventListener('click', function() {
@@ -124,9 +177,19 @@ document.getElementById('fileInput').addEventListener('change', function(event) 
 // Event listener for the space bar to draw rays
 window.addEventListener('keydown', (event) => {
     if (event.code === 'Space') {
-		console.log(armorValue);
-        castRayAtModel(armorValue, internalDensity, armorPenetration);  // Cast the ray at the model when space is pressed
-    }
+//		console.log(munitionsToggle)	
+		if(munitionsToggle = false) {
+//		console.log(munitionsToggle)	
+        castShellAtModel(armorValue, internalDensity, armorPenetration, armorDamageRadius, explosionRadius, castType);  // Cast the ray at the model when space is pressed
+
+		} else {
+		castShellAtModel(armorValue, internalDensity, armorPenetration, armorDamageRadius, explosionRadius, castType);  // Cast the ray at the model when space is pressed
+
+//		console.log(munitionsToggle)		
+//		castMissileAtModel()
+		
+		}
+	}
 });
 
 // Load hulls into dropdown and set the default behavior
@@ -149,7 +212,138 @@ fetch('hulls.txt').then(response => response.text()).then(data => {
 });
 
 
-function checkIntersectionWithRays() {
+
+function castMissileAtModel() {
+	
+	console.log("hi :3");
+	
+}
+
+
+
+// Function to load missile.csv and populate the missile dropdown
+function loadMissileCSV() {
+    fetch('missile.csv')
+        .then(response => response.text())
+        .then(data => {
+            const lines = data.split('\n');
+            const dropdown = document.getElementById('missileDropdown');
+            lines.forEach(line => {
+                const columns = line.split(',');
+                const option = document.createElement('option');
+                option.value = columns[0];
+                option.textContent = columns[0]; // Display the missile name
+                dropdown.appendChild(option);
+            });
+
+            // Add event listener to the dropdown to update input limits
+            dropdown.addEventListener('change', updateInputLimits);
+        })
+        .catch(error => console.error('Error loading missile.csv:', error));
+}
+
+// Function to update number input limits based on selected missile
+function updateInputLimits() {
+    const dropdown = document.getElementById('missileDropdown');
+    const selectedMissile = dropdown.value;
+    const lines = fetch('missile.csv')
+        .then(response => response.text())
+        .then(data => {
+            const rows = data.split('\n');
+            for (let row of rows) {
+                const columns = row.split(',');
+                if (columns[0] === selectedMissile) {
+                    const minValue = parseFloat(columns[1]);
+                    const maxValue = parseFloat(columns[2]);
+                    const numberInput = document.getElementById('numberInput');
+                    numberInput.setAttribute('min', minValue);
+                    numberInput.setAttribute('max', maxValue);
+                    numberInput.value = minValue; // Set to min value initially
+                    break;
+                }
+            }
+        });
+}
+
+
+
+
+function loadhull() {
+    console.log("loadhull");
+    const hullDropdown = document.getElementById('hullDropdown');
+    const hull = hullDropdown.value;
+
+    if (model) scene.remove(model);  // Remove previous hull model
+    if (colliderModel) scene.remove(colliderModel);  // Remove previous collider model
+
+    fetch(`hulls/${hull}.csv`)
+        .then(response => response.text())
+        .then(hullData => {
+            const lines = hullData.split('\n').filter(Boolean);
+            hullData = lines.map(line => line.split(',')); // Store CSV data for key matching
+            const firstLine = lines[0].split(',');
+            armorValue = parseFloat(firstLine[0]);
+            internalDensity = parseFloat(firstLine[1]);
+
+            loader.load(`hulls/${hull}.glb`, function (gltf) {
+                model = gltf.scene;
+                model.rotation.y = Math.PI;  // Flip model 180 degrees
+
+                model.traverse((child) => {
+                    if (child.isMesh) {
+                        child.visible = modelVisibility;
+                        const material = new THREE.MeshBasicMaterial({
+                            color: 0xffffff,
+                            transparent: true,
+                            opacity: modelTransparency,
+                            side: THREE.DoubleSide
+                        });
+                        child.material = material;
+                    }
+                });
+
+                scene.add(model);
+            });
+
+            // Load collider.glb from second value and set full transparency
+            loader.load(`hulls/${hull} Collider.glb`, function (gltf) {
+                colliderModel = gltf.scene;
+
+                colliderModel.traverse((child) => {
+                    if (child.isMesh) {
+					child.visible = colliderVisibility;
+                        child.material = new THREE.MeshBasicMaterial({
+                            vertexColors: true, // Ensure this is set
+                            color: 0xffffff,
+                            transparent: false,
+                            side: THREE.DoubleSide
+                        });
+
+                        // Set up vertex colors
+                        const geometry = child.geometry;
+                        if (geometry instanceof THREE.BufferGeometry) {
+                            const positionAttribute = geometry.attributes.position;
+                            const colorAttribute = geometry.attributes.color || new THREE.Float32BufferAttribute(positionAttribute.count * 3, 3);
+
+                            // Initialize color attribute
+                            for (let i = 0; i < positionAttribute.count; i++) {
+                                colorAttribute.setXYZ(i, 1, 1, 1); // Default to white
+                            }
+                            geometry.setAttribute('color', colorAttribute);
+                        }
+                    }
+                });
+
+                scene.add(colliderModel);
+            });
+
+		clearModules();
+		loadModules();
+        });
+}
+
+
+function isInsideModel() {
     if (!model) return;  // Return if the model isn't loaded
 
     // Ray 1: Cast a ray in the direction the camera is facing (forward)
@@ -170,24 +364,21 @@ function checkIntersectionWithRays() {
 
     // If the camera status changes, reload cubes and hull once
     if (!isCameraInside && cameraInsideModel) {
-
-        console.log("Camera entered the model");
-        transparency = 0.4;
-        transparencybool = false; 
-        reloadScene(); 
+		cubeTransparencyBool = false;
+        modelTransparency = 0.4;
         cameraInsideModel = false;
-
+		clearModules();
+		loadModules();
     } else if (isCameraInside && !cameraInsideModel) {
-        console.log("Camera exited the model");
-        transparency = 0.8; 
-        transparencybool = true;
-        reloadScene(); 
+		cubeTransparencyBool = true;
+        modelTransparency = 0.8; 
         cameraInsideModel = true; 
+		clearModules();
+		loadModules();
     }
 }
 
 
-// Reload the scene with a debounce to prevent rapid reloading
 function reloadScene() {
 	clearRaysAndLogs()
     loadModules();  // Reload cubes with updated transparency
@@ -209,7 +400,6 @@ function clearScene() {
 }
 
 
-// Load the shells into dropdown menu
 function loadShellsIntoDropdown(filePath, dropdownId) {
     fetch(filePath).then(response => response.text()).then(data => {
         const dropdown = document.getElementById(dropdownId);
@@ -224,67 +414,24 @@ function loadShellsIntoDropdown(filePath, dropdownId) {
 }
 
 
-function loadhull() {
-    console.log("loadhull");
-    const hullDropdown = document.getElementById('hullDropdown');
-    const hull = hullDropdown.value;
-    
-    if (model) scene.remove(model);  // Remove previous hull model
-    if (colliderModel) scene.remove(colliderModel);  // Remove previous collider model
-    
-    fetch(`hulls/${hull}.csv`)
-        .then(response => response.text())
-        .then(hullData => {
-            const lines = hullData.split('\n').filter(Boolean);
-            hullData = lines.map(line => line.split(',')); // Store CSV data for key matching
-            const firstLine = lines[0].split(',');
-			const armorValue = firstLine[0];
-			const internaldensity = firstLine[1];
-            
-            loader.load(`hulls/${hull}.glb`, function (gltf) {
-                model = gltf.scene;
-                model.rotation.y = Math.PI;  // Flip model 180 degrees
-                
-                model.traverse((child) => {
-                    if (child.isMesh) {
-                        const material = new THREE.MeshBasicMaterial({
-                            color: 0xffffff,
-                            transparent: true,
-                            opacity: transparency,
-                            side: THREE.DoubleSide
-                        });
-                        child.material = material;
-                    }
-                });
-
-                scene.add(model);
-            });
-
-            // Load collider.glb from second value and set full transparency
-            loader.load(`hulls/${hull} Collider.glb`, function (gltf) {
-                colliderModel = gltf.scene;
-                colliderModel.traverse((child) => {
-                    if (child.isMesh) {
-                        child.visible = false;  // Make collider invisible
-                    }
-                });
-
-                scene.add(colliderModel);
-            });
-            
-            loadModules(); // Trigger module loading after hull is loaded
-//			populateMenus(hullData)
-        });
+function setHullDropdown(hullType) {
+    const dropdown = document.getElementById("hullDropdown");
+    const options = dropdown.options;
+    for (let i = 0; i < options.length; i++) {
+        if (options[i].text.includes(hullType)) {
+            dropdown.selectedIndex = i;
+            reloadScene();
+            break;
+        }
+    }
 }
-
 
 
 function loadModules() { 
     console.log("loadModules");
     const hullDropdown = document.getElementById('hullDropdown');
     const hull = hullDropdown.value;
-    
-    clearModules();  // Clear old cubes
+
     
     fetch(`hulls/${hull}.csv`)
         .then(response => response.text())
@@ -307,16 +454,16 @@ function loadModules() {
 
                 let color;
                 switch (type) {
-                    case 0: color = 0xff0000; break;  // Red for type 0
-                    case 1: color = 0x00ff00; break;  // Green for type 1
-                    case 2: color = 0x0000ff; break;  // Blue for type 2
+                    case 0: color = 0x00ff00; break;
+                    case 1: color = 0x0000ff; break;
+                    case 2: color = 0xff0000; break;
                     default: color = 0xffffff;
                 }
                 
                 const geometry = new THREE.BoxGeometry(newSizeX, newSizeY, newSizeZ);
                 const material = new THREE.MeshBasicMaterial({
                     color,
-                    transparent: transparencybool, 
+                    transparent: cubeTransparencyBool, 
                     opacity: .7  
                 });
                 
@@ -353,7 +500,6 @@ function onMouseMove(event) {
 }
 
 
-// Clear all existing cubes
 function clearModules() {
     console.log("clearModules");
     boxes.forEach(box => scene.remove(box));
@@ -361,7 +507,6 @@ function clearModules() {
 }
 
 
-// Load shell asset values from selected shell
 function loadShellmodifers() {
 	console.log("loadShellmodifers");
     const shellDropdown = document.getElementById('shellDropdown');
@@ -376,12 +521,16 @@ function loadShellmodifers() {
                     line = line.trim();
                     if (line.startsWith('_armorDamageRadius')) {
                         armorDamageRadius = parseFloat(line.split(':')[1]);
+						console.log("armorDamageRadius", armorDamageRadius)
                     } else if (line.startsWith('_armorPenetration')) {
                         armorPenetration = parseFloat(line.split(':')[1]);
-//                    } else if (line.startsWith('_rayAngle')) {
-//                        rayAngle = parseFloat(line.split(':')[1]);
-//                   } else if (line.startsWith('_explosionRadius')) {
-//                        explosionRadius = parseFloat(line.split(':')[1]);
+						console.log("armorPenetration", armorPenetration)
+                    } else if (line.startsWith('_castType')) {
+                        castType = parseFloat(line.split(':')[1]);
+						console.log("castType", castType)
+                   } else if (line.startsWith('_explosionRadius')) {
+                        explosionRadius = parseFloat(line.split(':')[1]);
+						console.log("explosionRadius", explosionRadius)
 //                   } else if (line.startsWith('_componentDamage')) {
 //                        rayAngle = parseFloat(line.split(':')[1]);
 //						console.log(rayAngle);
@@ -394,131 +543,7 @@ function loadShellmodifers() {
     }
 }
 
-// Animation loop
-function animate() {
-    requestAnimationFrame(animate);
-    checkIntersectionWithRays();  // Check for ray intersections
-    controls.update();  // Update controls
-    renderer.render(scene, camera);
-}
 
-//armorValue, internalDensity, armorPenetration,
-
-function castRayAtModel() {
-    // Get camera position and direction
-    const cameraPosition = camera.position.clone();
-    const cameraDirection = new THREE.Vector3();
-    camera.getWorldDirection(cameraDirection);
-
-    // Create a ray from the camera position in the direction it is facing
-    const raycaster = new THREE.Raycaster(cameraPosition, cameraDirection);
-    const intersects = raycaster.intersectObject(colliderModel);
-
-    // Variables to store intersection points
-    let firstIntersection = null;
-    let secondIntersection = null;
-
-    if (intersects.length > 0) {
-        firstIntersection = intersects[0].point;
-
-        if (intersects.length > 1) {
-            secondIntersection = intersects[1].point;
-        }
-    }
-
-    const lines = [];  // Array to hold the lines to be toggled
-
-    // If intersections are found, draw lines
-    if (firstIntersection) {
-        // Draw red line from camera to the first intersection point
-        const redLine = drawLine(cameraPosition, firstIntersection, 0xff0000);
-        lines.push(redLine);
-
-        if (secondIntersection) {
-            // Calculate the direction from firstIntersection to secondIntersection
-            const direction = new THREE.Vector3().subVectors(secondIntersection, firstIntersection).normalize();
-
-            // Calculate the distance between the two intersection points (penetration depth)
-            const penetrationDepth = 18.5; //firstIntersection.distanceTo(secondIntersection);
-
-            // Call createDamageGeometry to generate the damage geometry at the first intersection point
-            createDamageGeometryAtPoint(firstIntersection, direction, penetrationDepth);
-
-            // Calculate the endpoint of the blue line using armorPenetration
-            const blueLineEnd = firstIntersection.clone().add(direction.multiplyScalar(armorPenetration / 4));
-            const blueLine = drawLine(firstIntersection, blueLineEnd, 0x0000ff);
-            lines.push(blueLine);
-        }
-    } else {
-        // Draw green line if no intersections
-        const endPoint = cameraPosition.clone().add(cameraDirection.multiplyScalar(100));  // Example far point
-        const greenLine = drawLine(cameraPosition, endPoint, 0x00ff00);
-        lines.push(greenLine);
-    }
-
-    // Log all the lines together
-    logShell(lines);
-}
-
-// Helper function to create damage geometry at the first intersection point
-function createDamageGeometryAtPoint(firstIntersection, direction, penetrationDepth) {
-    // Adjust the penetration depth by subtracting armor value
-    const adjustedPenetrationDepth = penetrationDepth - 0;
-
-    // Part 1: Create a 10m wide cylinder that extends to adjustedPenetrationDepth
-    const cylinderRadius = .5; // Radius is half of 10 meters
-    const cylinderHeight = adjustedPenetrationDepth;
-    const cylinderGeometry = new THREE.CylinderGeometry(cylinderRadius, cylinderRadius, cylinderHeight, 32);
-    const cylinderMaterial = new THREE.MeshBasicMaterial({ color: 0xff0000, wireframe: true});  // Solid red material
-    const cylinder = new THREE.Mesh(cylinderGeometry, cylinderMaterial);
-
-    // Set the cylinder's position: The midpoint of the cylinder should be halfway along its height.
-    const halfHeight = cylinderHeight / 2;
-    const startPoint = firstIntersection.clone();  // Start at the first intersection
-    const midpoint = startPoint.clone().add(direction.clone().multiplyScalar(halfHeight));  // Move halfway along the direction of the ray
-
-    // Set the cylinder's position at the midpoint
-    cylinder.position.copy(midpoint);
-
-    // Align the cylinder's axis with the ray direction
-    cylinder.quaternion.setFromUnitVectors(new THREE.Vector3(0, 1, 0), direction.clone().normalize());
-
-    // Add the cylinder to the scene
-    scene.add(cylinder);
-
-    // Part 2: Create spheres every 6.6m, scaling radii
-    const sphereCount = Math.floor(adjustedPenetrationDepth / .66);
-    let sphereRadius;
-    
-    for (let i = 0; i < sphereCount; i++) {
-        let distance = i * .66;
-        if (i <= 17) {
-            sphereRadius = THREE.MathUtils.lerp(.75, 2.5, i / 17); // Scaling up to 25 meters by the 18th sphere
-			console.log(sphereRadius);
-        } else {
-            sphereRadius = THREE.MathUtils.lerp(2.5, .75, (i - 18) / 8); // Scaling back down to 7.5 meters by the 26th sphere
-			console.log(sphereRadius);
-        }
-
-        // Create the sphere at the given distance
-        const sphereGeometry = new THREE.SphereGeometry(sphereRadius, 32, 32);
-        const sphereMaterial = new THREE.MeshBasicMaterial({ color: 0x00ff00, wireframe: true });  // Solid green material
-        const sphere = new THREE.Mesh(sphereGeometry, sphereMaterial);
-
-        // Position sphere along the direction
-        const spherePosition = startPoint.clone().add(direction.clone().multiplyScalar(distance));
-        sphere.position.copy(spherePosition);
-
-        // Add the sphere to the scene
-        scene.add(sphere);
-    }
-}
-
-
-
-
-
-// Function to clear all rays and log boxes from the scene and UI
 function clearRaysAndLogs() {
     // Ensure the scene exists before attempting to traverse it
     if (scene) {
@@ -545,46 +570,17 @@ function clearRaysAndLogs() {
     }
 
     // Reset the ray index counter
-    rayIndex = 0;
+  let  rayIndex = 0;
 }
 
 
-// Helper function to draw lines
-function drawLine(start, end, color) {
-    const geometry = new THREE.BufferGeometry().setFromPoints([start, end]);
-    const material = new THREE.LineBasicMaterial({ color });
-    const line = new THREE.Line(geometry, material);
-    scene.add(line);
-
-    return line;  // Return the created line so it can be toggled
-}
 
 
-// Log the ray(s) in the UI
-function logShell(lines) {
-    const rayLogContainer = document.getElementById('ray-log-container');
 
-    // Ensure the container exists in the DOM
-    if (!rayLogContainer) {
-        console.error('ray-log-container element not found in the DOM');
-        return;
-    }
 
-    const rayLog = document.createElement('div');
-    rayLog.className = 'ray-box';
-    rayLog.textContent = `Ray ${rayIndex + 1}`;  // Ray log text
-    rayLogContainer.appendChild(rayLog);
 
-    // Make the ray-log clickable to toggle the visibility of multiple lines
-    rayLog.addEventListener('click', () => {
-        lines.forEach(line => {
-            line.visible = !line.visible;  // Toggle visibility of each associated line
-        });
-        rayLog.classList.toggle('hidden-ray');  // Update UI class to indicate visibility
-    });
 
-    rayIndex++;  // Increment the ray index for the next ray
-}
+
 
 
 function createDecal(firstIntersection, normal) {
@@ -614,7 +610,6 @@ function createDecal(firstIntersection, normal) {
     scene.add(decal);
 }
 
-
 function createDecalAtFirstIntersection(intersectionPoint, normal) {
     const decalWidth = 1; // Set your desired decal width
     const decalHeight = 1; // Set your desired decal height
@@ -641,14 +636,6 @@ function createDecalAtFirstIntersection(intersectionPoint, normal) {
 
 
 
-
-
-
-
-
-
-
-
 function parseXML(fileContent) {
     const parser = new DOMParser();
     const xmlDoc = parser.parseFromString(xml, "text/xml");
@@ -664,19 +651,6 @@ function parseXML(fileContent) {
         const componentName = socket.querySelector("ComponentName").textContent;
         updateComponentInUI(key, componentName); // Implement this
     });
-}
-
-function setHullDropdown(hullType) {
-    const dropdown = document.getElementById("hullDropdown");
-    const options = dropdown.options;
-    for (let i = 0; i < options.length; i++) {
-        if (options[i].text.includes(hullType)) {
-            dropdown.selectedIndex = i;
-            // Trigger the necessary reload or update after selection
-            reloadScene();
-            break;
-        }
-    }
 }
 
 function findMatchingRowByKey(key) {
@@ -705,20 +679,58 @@ function updateComponentInUI(key, componentName) {
 
 
 
+function castShellAtModel() {
+	
+	localArmorStrip = 0;
+
+    // Get camera position and direction
+    const cameraPosition = camera.position.clone();
+    const cameraDirection = new THREE.Vector3();
+    camera.getWorldDirection(cameraDirection);
+
+    // Create a ray from the camera position in the direction it is facing
+    const raycaster = new THREE.Raycaster(cameraPosition, cameraDirection);
+    const intersects = raycaster.intersectObject(colliderModel);
+
+    // Variables to store intersection points and normal
+    let firstIntersection = null;
+    let secondIntersection = null;
+    let intersectionNormal = null;
+
+    if (intersects.length > 0) {
+        firstIntersection = intersects[0].point;
+        intersectionNormal = intersects[0].face.normal.clone();
+		
+		intersectionNormal.applyMatrix3(
+			new THREE.Matrix3().getNormalMatrix(intersects[0].object.matrixWorld)
+			).normalize();
+
+        if (intersects.length > 1) {
+            secondIntersection = intersects[1].point;
+        }
+    }
+	
+    if (firstIntersection) {
+		getOutcome(scene, cameraPosition, cameraDirection, armorValue, internalDensity, armorPenetration, armorDamageRadius, explosionRadius, castType, localArmorStrip, firstIntersection, secondIntersection, intersectionNormal, boxes)
+		
+    } else {
+        // Draw green line if no intersections
+        const endPoint = cameraPosition.clone().add(cameraDirection.multiplyScalar(100));  // Example far point
+        const greenLine = createLine(scene, cameraPosition, endPoint, 0x00ff00);
+        lines.push(greenLine);
+    }
+
+//    logShell(lines);
+}
 
 
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
+function animate() {
+	isInsideModel();
+    requestAnimationFrame(animate);
+    controls.update();  // Update controls
+    renderer.render(scene, camera);
+}
